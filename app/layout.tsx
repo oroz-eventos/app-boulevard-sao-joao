@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import BottomNav from '@/src/components/BottomNav'
 import ServiceWorkerRegistrar from '@/src/components/ServiceWorkerRegistrar'
+import SplashScreen from '@/src/components/SplashScreen'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -48,6 +49,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans bg-app-bg`}
       >
         <ServiceWorkerRegistrar />
+        <SplashScreen />
         <div className="mx-auto" style={{ maxWidth: 'var(--max-app-width)' }}>
           <main className="pb-safe min-h-screen">
             {children}
