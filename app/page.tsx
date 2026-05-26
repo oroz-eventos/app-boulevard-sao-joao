@@ -6,7 +6,8 @@ import HomeHero from '@/src/features/home/HomeHero'
 import HomeShortcuts from '@/src/features/home/HomeShortcuts'
 import HomeFeatured from '@/src/features/home/HomeFeatured'
 import HomePromo from '@/src/features/home/HomePromo'
-import HomeQuickAccess from '@/src/features/home/HomeQuickAccess'
+import HomeGrandesEventos from '@/src/features/home/HomeGrandesEventos'
+import HomeBoulevardAgora from '@/src/features/home/HomeBoulevardAgora'
 
 export default function HomePage() {
   return (
@@ -51,26 +52,45 @@ export default function HomePage() {
         <HomeShortcuts />
       </section>
 
-      <section className="px-4 pt-5">
+      {/* O Boulevard agora */}
+      <section className="pt-5">
+        <div className="px-4 mb-3 flex items-center justify-between">
+          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
+            O Boulevard agora
+          </h2>
+        </div>
+        <HomeBoulevardAgora />
+      </section>
+
+      {/* Destaque · evento do mês */}
+      <section className="px-4 pt-6">
         <HomeFeatured />
       </section>
 
-      <section className="pt-5">
+      {/* Grandes Eventos · 12 cards */}
+      <section className="pt-6">
+        <div className="px-4 mb-3 flex items-center justify-between">
+          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
+            Grandes eventos do ano
+          </h2>
+          <Link
+            href="/eventos"
+            className="text-[12px] font-semibold text-brand press-scale"
+          >
+            Ver todos
+          </Link>
+        </div>
+        <HomeGrandesEventos />
+      </section>
+
+      {/* Central de Interação · promo */}
+      <section className="pt-6 pb-4">
         <div className="px-4 mb-3">
           <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
-            Vantagens e promoções
+            Central de Interação
           </h2>
         </div>
         <HomePromo />
-      </section>
-
-      <section className="pt-5 pb-4">
-        <div className="px-4 mb-3">
-          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
-            Explore o boulevard
-          </h2>
-        </div>
-        <HomeQuickAccess />
       </section>
     </div>
   )
