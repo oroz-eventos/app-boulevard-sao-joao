@@ -8,7 +8,7 @@ export default function HomeFeatured() {
       <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
         Destaque agora
       </h2>
-      <Link href="/programacao" className="block relative rounded-2xl overflow-hidden h-44 press-scale">
+      <Link href={FEATURED.href} className="block relative rounded-2xl overflow-hidden h-44 press-scale">
         <Image
           src={FEATURED.imageUri}
           alt={FEATURED.title}

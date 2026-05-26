@@ -1,3 +1,13 @@
+/**
+ * Comércios e bares parceiros do Boulevard São João (V8).
+ * Nomes plausíveis da rede ABRASEL do eixo São João + Ipiranga.
+ * Cada comércio carrega flags de:
+ *   - acessibilidade (rampa, libras, audiodescrição, braille)
+ *   - se aceita cupom Boulevard (Vantagens)
+ */
+
+export type AcessibilidadeFlag = 'rampa' | 'libras' | 'audiodescricao' | 'braille'
+
 export type ComercioStore = {
   id: string
   name: string
@@ -12,130 +22,161 @@ export type ComercioStore = {
   instagramUrl?: string
   websiteUrl?: string
   keywords: string[]
+  acessibilidade: AcessibilidadeFlag[]
+  aceitaCupomBoulevard: boolean
 }
 
 export const COMERCIO_FILTERS = [
-  { id: 'todos',     label: 'Todos' },
-  { id: 'cafes',     label: 'Cafés' },
+  { id: 'todos',       label: 'Todos' },
+  { id: 'bares',       label: 'Bares' },
+  { id: 'cafes',       label: 'Cafés' },
   { id: 'gastronomia', label: 'Gastronomia' },
-  { id: 'moda',      label: 'Moda' },
-  { id: 'servicos',  label: 'Serviços' },
-  { id: 'bem-estar', label: 'Bem-estar' },
-  { id: 'cultura',   label: 'Cultura' },
+  { id: 'cultura',     label: 'Cultura' },
+  { id: 'servicos',    label: 'Serviços' },
+  { id: 'bem-estar',   label: 'Bem-estar' },
 ]
 
 export const COMERCIO_STORES: ComercioStore[] = [
   {
-    id: 'comercio-1',
-    name: 'Café Estação 31',
-    category: 'cafes',
+    id: 'bar-brahma',
+    name: 'Bar Brahma',
+    category: 'bares',
     discountLabel: '10% off',
-    logoText: 'E31',
+    logoText: 'BB',
     logoTone: 'brand',
-    facadeImageUri: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Cafés especiais, brunch o dia todo e combos rápidos para quem está circulando entre os palcos.',
-    addressLine: 'Rua Aurora, 31',
-    openingHours: 'Aberto hoje até 20h',
-    instagramUrl: 'https://instagram.com/cafeestacao31',
-    websiteUrl: 'https://estacao31.example.com',
-    keywords: ['café', 'brunch', 'wifi', 'doces', 'take away', 'especial'],
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Ícone da esquina São João × Ipiranga. Choro ao vivo, MPB e cardápio histórico de bistrô paulistano desde 1948.',
+    addressLine: 'Av. São João, 677',
+    openingHours: 'Ter–Dom · 12h–02h',
+    instagramUrl: 'https://instagram.com/barbrahmasp',
+    websiteUrl: 'https://barbrahma.com.br',
+    keywords: ['bar', 'choro', 'MPB', 'happy hour', 'icônico'],
+    acessibilidade: ['rampa', 'audiodescricao'],
+    aceitaCupomBoulevard: true,
   },
   {
-    id: 'comercio-2',
-    name: 'Casa Vitrine',
-    category: 'moda',
-    discountLabel: '20% off',
-    logoText: 'CV',
-    logoTone: 'pink',
-    facadeImageUri: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Curadoria de moda autoral, acessórios e peças leves para acompanhar a programação do boulevard.',
-    addressLine: 'Galeria São João, loja 12',
-    openingHours: 'Aberto hoje até 21h',
-    instagramUrl: 'https://instagram.com/casavitrine',
-    websiteUrl: 'https://casavitrine.example.com',
-    keywords: ['moda', 'acessórios', 'autoral', 'roupas', 'design', 'estilo'],
+    id: 'galeria-metropole',
+    name: 'Galeria Metrópole',
+    category: 'cultura',
+    logoText: 'GM',
+    logoTone: 'blue',
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Galeria comercial modernista com livrarias, cinemas independentes e ateliês — agora abriga residência de grafiteiras paulistanas.',
+    addressLine: 'Av. São João, 474',
+    openingHours: 'Seg–Sáb · 10h–22h',
+    instagramUrl: 'https://instagram.com/galeriametropole',
+    keywords: ['galeria', 'cultura', 'livraria', 'cinema', 'modernismo'],
+    acessibilidade: ['rampa', 'libras', 'braille'],
+    aceitaCupomBoulevard: false,
   },
   {
-    id: 'comercio-3',
-    name: 'Mercado do Pátio',
-    category: 'gastronomia',
-    logoText: 'MP',
+    id: 'cafe-da-republica',
+    name: 'Café da República',
+    category: 'cafes',
+    discountLabel: '15% off',
+    logoText: 'CR',
     logoTone: 'orange',
-    facadeImageUri: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Empório com frios, sanduíches, bebidas geladas e itens práticos para aproveitar os eventos por perto.',
-    addressLine: 'Pátio Central, acesso leste',
-    openingHours: 'Aberto hoje até 22h',
-    instagramUrl: 'https://instagram.com/mercadodopatio',
-    keywords: ['mercado', 'sanduíches', 'bebidas', 'empório', 'snacks', 'gastronomia'],
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Café especial com torra própria + brunch aos finais de semana. Esplanada com vista pra Praça da República.',
+    addressLine: 'Pça da República, 386',
+    openingHours: 'Todos os dias · 7h–22h',
+    instagramUrl: 'https://instagram.com/cafedarepublica',
+    keywords: ['café', 'brunch', 'esplanada', 'especial'],
+    acessibilidade: ['rampa'],
+    aceitaCupomBoulevard: true,
   },
   {
-    id: 'comercio-4',
+    id: 'estadao-bar',
+    name: 'Estadão Bar e Lanches',
+    category: 'gastronomia',
+    logoText: 'EB',
+    logoTone: 'orange',
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Famoso pelo pernil. Funcionando 24h, atende jornalistas, taxistas e moradores há mais de 50 anos.',
+    addressLine: 'Viaduto 9 de Julho, 193',
+    openingHours: 'Aberto 24h',
+    instagramUrl: 'https://instagram.com/estadaobar',
+    keywords: ['lanche', 'pernil', '24h', 'tradição'],
+    acessibilidade: ['rampa'],
+    aceitaCupomBoulevard: true,
+  },
+  {
+    id: 'cinemateca-boulevard',
+    name: 'Cinemateca Boulevard',
+    category: 'cultura',
+    logoText: 'CB',
+    logoTone: 'neutral',
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Sala independente com programação autoral. Sessões temáticas alinhadas com a editorial Arte na Tela.',
+    addressLine: 'Rua Marconi, 53',
+    openingHours: 'Qua–Dom · 14h–23h',
+    instagramUrl: 'https://instagram.com/cinematecaboulevard',
+    keywords: ['cinema', 'autoral', 'cultura', 'independente'],
+    acessibilidade: ['rampa', 'libras', 'audiodescricao'],
+    aceitaCupomBoulevard: false,
+  },
+  {
+    id: 'mercado-paissandu',
+    name: 'Mercado do Paissandu',
+    category: 'gastronomia',
+    discountLabel: '20% off',
+    logoText: 'MP',
+    logoTone: 'green',
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Empório com produtores locais, sanduíches, vinhos paulistanos e cardápio rotativo dos chefs do bairro.',
+    addressLine: 'Largo do Paissandu, 51',
+    openingHours: 'Seg–Sáb · 9h–22h · Dom · 10h–18h',
+    instagramUrl: 'https://instagram.com/mercadopaissandu',
+    keywords: ['mercado', 'empório', 'vinhos', 'sanduíches', 'produtor local'],
+    acessibilidade: ['rampa', 'braille'],
+    aceitaCupomBoulevard: true,
+  },
+  {
+    id: 'oficina-prisma',
     name: 'Oficina Prisma',
     category: 'servicos',
     logoText: 'OP',
     logoTone: 'blue',
-    facadeImageUri: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Impressão rápida, brindes personalizados e apoio gráfico para ativações e ações do boulevard.',
-    addressLine: 'Travessa do Centro, 84',
-    openingHours: 'Aberto hoje até 19h',
-    websiteUrl: 'https://oficinaprisma.example.com',
-    keywords: ['serviços', 'impressão', 'gráfica', 'brindes', 'adesivos', 'apoio'],
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Impressão rápida, brindes e apoio gráfico para ativações no calçadão. Atende marcas parceiras do Boulevard.',
+    addressLine: 'Rua Aurora, 84',
+    openingHours: 'Seg–Sex · 9h–19h',
+    websiteUrl: 'https://oficinaprisma.com.br',
+    keywords: ['gráfica', 'impressão', 'brindes', 'apoio', 'serviços'],
+    acessibilidade: ['rampa'],
+    aceitaCupomBoulevard: false,
   },
   {
-    id: 'comercio-5',
+    id: 'corpo-calmo',
     name: 'Ateliê Corpo Calmo',
     category: 'bem-estar',
     discountLabel: '15% off',
     logoText: 'CC',
     logoTone: 'green',
-    facadeImageUri: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Massagem express, aromaterapia e produtos de autocuidado para recarregar entre uma atração e outra.',
+    facadeImageUri:
+      'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=1200&q=80',
+    summary:
+      'Massagem express, aromaterapia e autocuidado pra quem precisa recarregar entre uma atração e outra.',
     addressLine: 'Rua Vitória, 112',
-    openingHours: 'Sessões até 18h30',
-    instagramUrl: 'https://instagram.com/corpocalmo',
-    websiteUrl: 'https://corpocalmo.example.com',
-    keywords: ['bem-estar', 'massagem', 'aromaterapia', 'autocuidado', 'relaxamento'],
-  },
-  {
-    id: 'comercio-6',
-    name: 'Livraria Marco Zero',
-    category: 'cultura',
-    logoText: 'MZ',
-    logoTone: 'neutral',
-    facadeImageUri: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Livros, zines e encontros com autores independentes em um espaço cultural perto do circuito do evento.',
-    addressLine: 'Esquina da São João com Ipiranga',
-    openingHours: 'Aberto hoje até 20h',
-    instagramUrl: 'https://instagram.com/livrariamarcozero',
-    keywords: ['livraria', 'cultura', 'zines', 'autores', 'independente', 'leituras'],
-  },
-  {
-    id: 'comercio-7',
-    name: 'Bistrô do Boulevard',
-    category: 'gastronomia',
-    discountLabel: '10% off',
-    logoText: 'BB',
-    logoTone: 'orange',
-    facadeImageUri: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Menu executivo, drinks clássicos e varanda com vista para o fluxo principal dos eventos.',
-    addressLine: 'Avenida São João, 201',
-    openingHours: 'Aberto hoje até 23h',
-    instagramUrl: 'https://instagram.com/bistrodoboulevard',
-    websiteUrl: 'https://bistroboulevard.example.com',
-    keywords: ['bistrô', 'drinks', 'jantar', 'varanda', 'almoço', 'gastronomia'],
-  },
-  {
-    id: 'comercio-8',
-    name: 'Laboratório Criativo',
-    category: 'servicos',
-    logoText: 'LC',
-    logoTone: 'brand',
-    facadeImageUri: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80',
-    summary: 'Coworking, estúdio e apoio para creators e marcas locais durante a programação do boulevard.',
-    addressLine: 'Edifício Central, 4º andar',
-    openingHours: 'Aberto hoje até 20h',
-    websiteUrl: 'https://laboratoriocriativo.example.com',
-    keywords: ['coworking', 'estúdio', 'creator', 'produção', 'serviços', 'marcas'],
+    openingHours: 'Seg–Sáb · 10h–19h',
+    instagramUrl: 'https://instagram.com/corpocalmoatelie',
+    keywords: ['bem-estar', 'massagem', 'aromaterapia', 'autocuidado'],
+    acessibilidade: ['rampa'],
+    aceitaCupomBoulevard: true,
   },
 ]
 
@@ -146,4 +187,11 @@ export const LOGO_TONE_COLORS: Record<ComercioStore['logoTone'], string> = {
   blue:    '#3B5BDB',
   green:   '#16A34A',
   neutral: '#525252',
+}
+
+export const ACESSIBILIDADE_LABEL: Record<AcessibilidadeFlag, string> = {
+  rampa:          'Rampa',
+  libras:         'LIBRAS',
+  audiodescricao: 'Áudio-descrição',
+  braille:        'Cardápio em braille',
 }

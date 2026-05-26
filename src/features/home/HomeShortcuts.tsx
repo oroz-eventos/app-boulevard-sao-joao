@@ -1,24 +1,24 @@
 import Link from 'next/link'
 import {
   IconCalendarEvent,
-  IconSearch,
   IconMap2,
   IconShoppingBag,
-  IconRss,
-  IconSparkles,
-  IconBuildingStore,
+  IconDeviceTv,
+  IconHeart,
+  IconBrain,
+  IconPaw,
   IconGift,
 } from '@tabler/icons-react'
 import { CATEGORY_SHORTCUTS, type ShortcutIconName } from '@/src/lib/data/home'
 
 const ICON_MAP = {
   calendar: IconCalendarEvent,
-  search:   IconSearch,
   map:      IconMap2,
   shopping: IconShoppingBag,
-  rss:      IconRss,
-  sparkles: IconSparkles,
-  store:    IconBuildingStore,
+  screen:   IconDeviceTv,
+  kiss:     IconHeart,
+  quiz:     IconBrain,
+  pet:      IconPaw,
   gift:     IconGift,
 } satisfies Record<ShortcutIconName, React.ComponentType<{ size?: number; stroke?: number; className?: string }>>
 

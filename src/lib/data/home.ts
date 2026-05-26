@@ -1,111 +1,165 @@
+/**
+ * Dados oficiais Home Boulevard São João (V8).
+ * Tudo aqui está alinhado ao calendário oficial dos 12 grandes eventos
+ * e às funcionalidades reais do app mostradas no V8 (Kiss Cam, Quizzes,
+ * envio pra telão, Janelas para o Mundo etc.).
+ */
+
+import { GRANDES_EVENTOS, eventoDoMes } from './eventos'
+
 export const LIVE_TICKER_ITEMS = [
-  'Feira do Boulevard 10–18h',
-  'Roda de Samba com Ju Moraes — Palco 1',
-  'Transmissão ao vivo — Palco 2 • 18h',
-  'Quiz interativo no Telão 3 — participe pelo app',
-  'Agora • Feira de artesanato lota o Pátio Central',
-  'Cozinha ao vivo — oficina de massas na Praça das Oficinas',
-  'Fila liberada • entrada rápida no show das 18h',
-  'Degustação de vinhos na Praça do Vinho — até 20h',
-  'Infantil • oficina de tintas naturais — Jardim das Famílias',
-  'Exposição imersiva no centro — últimas vagas hoje',
-  'Feira de Design — fila em movimento na ala leste',
-  'Circuito de lojas criativas — mapa atualizado no app',
-  'Palco 3 • DJ set ao pôr do sol — 19h30',
-  'Balcão de informações — mapa impresso disponível',
-  'Estacionamento sul com vagas liberadas agora',
-  'Food trucks na Praça Norte — fila curta',
-  'Sessão de fotos no Photo Booth — gratuito até 17h',
-  'Workshop de cerâmica — inscrições na tenda 8',
-  'Agora • Aula aberta de forró no Palco Rua',
-  'Mercado criativo com novas marcas na Alameda 2',
+  'Palco 2 às 19h · Roda de samba paulistana',
+  'Kiss Cam ativa agora · aponte sua câmera no telão Brahma',
+  'Feira dominical no eixo · 80 estandes abertos até 18h',
+  'Vertical Sports na empena · escalada com monitor às 16h',
+  'Super Quiz da semana liberado no app · prêmio do Bar Brahma',
+  'Janela para o Mundo · ao vivo agora com Times Square',
+  'Semana das Embaixadinhas · envie seu vídeo pra aparecer',
+  'Parcão abriu · feira de adoção com 12 cães',
+  'Cinema ao ar livre no Espaço Cauby às 20h',
+  'Telão Drogaria SP com mostra de Arte na Tela · grafiteiras paulistanas',
+  'Palco Rua às 21h · batalha de MC convida MCs do Centro',
+  'Cortejo afro sai do Paissandu às 17h',
+  'Bar Brahma com choro ao vivo · happy hour até 19h',
+  'Editorial Acontece no Centro · novo café da Marechal abre amanhã',
+  'Conteúdo ao Vivo · transmissão do Oscars no telão central',
+  'Bondinho Natalino circulando · embarque no Largo do Paissandu',
+  'Quiz da Avenida da Esperança no app · 1.243 jogando agora',
+  'Acendimento sincronizado dos 4 telões às 18h',
+  'Filtro AR da semana · álbum de figurinhas do paulistano',
+  'Show internacional anunciado pro Boulevard Festival · 09/26',
 ]
 
+/** Atalhos da home — todos os 8 levam pra rotas reais do app */
 export type ShortcutIconName =
-  | 'calendar' | 'search' | 'map' | 'shopping'
-  | 'rss' | 'sparkles' | 'store' | 'gift'
+  | 'calendar' | 'map' | 'shopping' | 'screen'
+  | 'kiss' | 'quiz' | 'pet' | 'gift'
 
-export const CATEGORY_SHORTCUTS: { id: string; label: string; icon: ShortcutIconName; href: string }[] = [
+export const CATEGORY_SHORTCUTS: {
+  id: string
+  label: string
+  icon: ShortcutIconName
+  href: string
+}[] = [
   { id: 'prog',      label: 'Programação', icon: 'calendar', href: '/programacao' },
-  { id: 'busca',     label: 'Busca',       icon: 'search',   href: '/busca' },
   { id: 'mapa',      label: 'Mapa',        icon: 'map',      href: '/mapa' },
   { id: 'feira',     label: 'Feira',       icon: 'shopping', href: '/feira' },
-  { id: 'feed',      label: 'Feed',        icon: 'rss',      href: '/feed' },
-  { id: 'telao',     label: 'Interaja',    icon: 'sparkles', href: '/interaja' },
-  { id: 'lojas',     label: 'Comércios',   icon: 'store',    href: '/comercios' },
+  { id: 'telas',     label: 'Telões',      icon: 'screen',   href: '/feed' },
+  { id: 'kiss',      label: 'Kiss Cam',    icon: 'kiss',     href: '/interaja' },
+  { id: 'quiz',      label: 'Quizzes',     icon: 'quiz',     href: '/interaja' },
+  { id: 'pet',       label: 'Pet',         icon: 'pet',      href: '/mapa' },
   { id: 'vantagens', label: 'Vantagens',   icon: 'gift',     href: '/vantagens' },
 ]
 
-export const HERO_SLIDES = [
+/** Hero rotativa — evento do mês ativo + abertura sábado */
+export type HeroSlide = {
+  id: string
+  backgroundColor: string
+  title: string
+  subtitle: string
+  cta: string
+  ctaHref: string
+}
+
+const evento = eventoDoMes()
+
+export const HERO_SLIDES: HeroSlide[] = [
   {
-    id: 'hero-1',
-    backgroundColor: '#5500CC',
-    title: 'Boulevard ao vivo',
-    subtitle: 'Cultura, gastronomia e experiências na rua',
-    cta: 'Explorar agora',
-    ctaHref: '/programacao',
+    id: 'hero-evento',
+    backgroundColor: evento?.themeColor ?? '#5500CC',
+    title: evento ? evento.title : 'Boulevard São João',
+    subtitle: evento ? evento.tagline : 'O Centro de SP volta a pulsar',
+    cta: evento ? 'Ver programação' : 'Explorar',
+    ctaHref: evento ? `/eventos/${evento.slug}` : '/programacao',
   },
   {
-    id: 'hero-2',
-    backgroundColor: '#F97316',
-    title: 'Feira do fim de semana',
-    subtitle: 'Estandes, oficinas e comércio local',
-    cta: 'Ver mapa',
+    id: 'hero-sabado',
+    backgroundColor: '#E91E8C',
+    title: 'Sábado, a rua se abre',
+    subtitle: 'Abertura simbólica às 18h · 4 palcos no eixo',
+    cta: 'Ver palcos',
     ctaHref: '/mapa',
+  },
+  {
+    id: 'hero-domingo',
+    backgroundColor: '#3B5BDB',
+    title: 'Domingo é dia de feira',
+    subtitle: 'Gastronomia, artesanato, parcão e arte de rua',
+    cta: 'Explorar feira',
+    ctaHref: '/feira',
   },
 ]
 
-export const FEATURED = {
-  imageUri: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80',
-  tag: 'Palco 2 • 18h • Acesso Livre',
-  title: 'Transmissão da Copa — Brasil contra Argentina',
-  meta: 'Ao vivo no Boulevard',
-}
+/** Destaque agora — sempre o evento do mês */
+export const FEATURED = evento
+  ? {
+      imageUri: evento.imageUri,
+      tag: `${evento.monthLabel} · Grande evento do mês`,
+      title: evento.title,
+      meta: evento.tagline,
+      href: `/eventos/${evento.slug}`,
+    }
+  : {
+      imageUri: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+      tag: 'Boulevard São João',
+      title: 'O Centro de SP volta a pulsar',
+      meta: 'Programação contínua de eventos',
+      href: '/programacao',
+    }
 
+/** Promo carousel — utilidade pública + central de interação */
 export const PROMO_SLIDES = [
   {
-    id: 'promo-1',
-    title: 'Café Passarola',
-    subtitle: 'Café coado grátis no seu primeiro pedido.',
-    cta: 'Resgatar',
-    backgroundColor: '#2A0066',
-    href: '/vantagens',
+    id: 'promo-kiss',
+    title: 'Kiss Cam Boulevard',
+    subtitle: 'Mostre seu carinho · seu beijo pode aparecer no telão Brahma.',
+    cta: 'Abrir Kiss Cam',
+    backgroundColor: '#E91E8C',
+    href: '/interaja',
   },
   {
-    id: 'promo-2',
-    title: 'Vantagens Boulevard',
-    subtitle: 'Descontos nos comércios da região.',
-    cta: 'Ver ofertas',
-    backgroundColor: '#8B1454',
-    href: '/vantagens',
-  },
-  {
-    id: 'promo-3',
-    title: 'Telão Interativo',
-    subtitle: 'Envie seu vídeo de 15s e apareça no telão.',
-    cta: 'Participar',
+    id: 'promo-quiz',
+    title: 'Super Quiz da semana',
+    subtitle: 'Responda em tempo real e suba no ranking dos paulistanos.',
+    cta: 'Jogar agora',
     backgroundColor: '#3B5BDB',
+    href: '/interaja',
+  },
+  {
+    id: 'promo-telao',
+    title: 'Envie pra tela',
+    subtitle: 'Semana das Embaixadinhas · grava 15s e aparece no telão.',
+    cta: 'Participar',
+    backgroundColor: '#5500CC',
+    href: '/interaja',
+  },
+  {
+    id: 'promo-janelas',
+    title: 'Janelas para o Mundo',
+    subtitle: 'Telões síncronos com Nova York e Tóquio · ao vivo agora.',
+    cta: 'Ver ao vivo',
+    backgroundColor: '#2A0066',
     href: '/interaja',
   },
 ]
 
-export const QUICK_ACCESS = [
-  {
-    id: 'programacao',
-    label: 'PROGRAMAÇÃO',
-    imageUri: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80',
-    href: '/programacao',
-  },
-  {
-    id: 'gastronomia',
-    label: 'GASTRONOMIA',
-    imageUri: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80',
-    href: '/busca',
-  },
-  {
-    id: 'feed',
-    label: 'DESCUBRA E APRENDA',
-    imageUri: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
-    href: '/feed',
-  },
-]
+/**
+ * Quick access — sempre os 3 próximos Grandes Eventos do calendário,
+ * a partir do mês atual.
+ */
+function proximosTresEventos() {
+  const mesAtual = new Date().getMonth() + 1
+  const ordenados = [...GRANDES_EVENTOS].sort((a, b) => {
+    const diffA = (a.month - mesAtual + 12) % 12
+    const diffB = (b.month - mesAtual + 12) % 12
+    return diffA - diffB
+  })
+  return ordenados.slice(0, 3)
+}
+
+export const QUICK_ACCESS = proximosTresEventos().map((e) => ({
+  id: e.slug,
+  label: e.title.toUpperCase(),
+  imageUri: e.imageUri,
+  href: `/eventos/${e.slug}`,
+}))
