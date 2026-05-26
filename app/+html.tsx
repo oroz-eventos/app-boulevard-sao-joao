@@ -5,6 +5,10 @@ import { ScrollViewStyleReset } from 'expo-router/html'
 // The contents of this function only run in Node.js environments and
 // do not have access to the DOM or browser APIs.
 export default function Root({ children }: { children: React.ReactNode }) {
+  const manifest = JSON.parse(process.env.APP_MANIFEST ?? '{}')
+  const baseUrl = manifest.expo?.experiments?.baseUrl ?? ''
+  const withBaseUrl = (path: string) => `${baseUrl}${path}`
+
   return (
     <html lang="en">
       <head>
@@ -25,6 +29,25 @@ export default function Root({ children }: { children: React.ReactNode }) {
           However, body scrolling is often nice to have for mobile web. If you want to enable it, remove this line.
         */}
         <ScrollViewStyleReset />
+
+        <meta name="application-name" content="Boulevard São João" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Boulevard" />
+        <meta name="theme-color" content="#5500CC" />
+        <link rel="manifest" href={withBaseUrl('/manifest.json')} />
+        <link rel="apple-touch-icon" href={withBaseUrl('/icon-192.png')} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                  navigator.serviceWorker.register('${withBaseUrl('/sw.js')}', { scope: '${withBaseUrl('/')}' }).catch(function () {});
+                });
+              }
+            `,
+          }}
+        />
 
         {/* Using raw CSS styles as an escape-hatch to ensure the background color never flickers in dark-mode. */}
         <style dangerouslySetInnerHTML={{ __html: responsiveBackground }} />
