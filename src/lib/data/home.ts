@@ -21,15 +21,19 @@ export const LIVE_TICKER_ITEMS = [
   'Mercado criativo com novas marcas na Alameda 2',
 ]
 
-export const CATEGORY_SHORTCUTS = [
-  { id: 'prog',      label: 'Programação', icon: '📅', href: '/programacao' },
-  { id: 'busca',     label: 'Busca',       icon: '🔍', href: '/busca' },
-  { id: 'mapa',      label: 'Mapa',        icon: '🗺️', href: '/mapa' },
-  { id: 'feira',     label: 'Feira',       icon: '🛍️', href: '/feira' },
-  { id: 'feed',      label: 'Feed',        icon: '▶️', href: '/feed' },
-  { id: 'telao',     label: 'Interaja',    icon: '✨', href: '/interaja' },
-  { id: 'lojas',     label: 'Comércios',   icon: '🏪', href: '/comercios' },
-  { id: 'vantagens', label: 'Vantagens',   icon: '🎁', href: '/vantagens' },
+export type ShortcutIconName =
+  | 'calendar' | 'search' | 'map' | 'shopping'
+  | 'rss' | 'sparkles' | 'store' | 'gift'
+
+export const CATEGORY_SHORTCUTS: { id: string; label: string; icon: ShortcutIconName; href: string }[] = [
+  { id: 'prog',      label: 'Programação', icon: 'calendar', href: '/programacao' },
+  { id: 'busca',     label: 'Busca',       icon: 'search',   href: '/busca' },
+  { id: 'mapa',      label: 'Mapa',        icon: 'map',      href: '/mapa' },
+  { id: 'feira',     label: 'Feira',       icon: 'shopping', href: '/feira' },
+  { id: 'feed',      label: 'Feed',        icon: 'rss',      href: '/feed' },
+  { id: 'telao',     label: 'Interaja',    icon: 'sparkles', href: '/interaja' },
+  { id: 'lojas',     label: 'Comércios',   icon: 'store',    href: '/comercios' },
+  { id: 'vantagens', label: 'Vantagens',   icon: 'gift',     href: '/vantagens' },
 ]
 
 export const HERO_SLIDES = [

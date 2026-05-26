@@ -1,15 +1,33 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, Rss, MapPin, Tag } from 'lucide-react'
+import {
+  IconHome,
+  IconHomeFilled,
+  IconSearch,
+  IconRss,
+  IconMapPin,
+  IconMapPinFilled,
+  IconTag,
+  IconTagFilled,
+  IconSparkles,
+} from '@tabler/icons-react'
 
-const TABS = [
-  { href: '/',          label: 'Início',    Icon: Home    },
-  { href: '/busca',     label: 'Busca',     Icon: Search  },
-  { href: '/feed',      label: 'Feed',      Icon: Rss     },
-  { href: '/mapa',      label: 'Mapa',      Icon: MapPin  },
-  { href: '/vantagens', label: 'Vantagens', Icon: Tag     },
-] as const
+type Tab = {
+  href: string
+  label: string
+  Icon: typeof IconHome
+  IconActive: typeof IconHome
+  featured?: boolean
+}
+
+const TABS: Tab[] = [
+  { href: '/',          label: 'Início',    Icon: IconHome,     IconActive: IconHomeFilled    },
+  { href: '/busca',     label: 'Busca',     Icon: IconSearch,   IconActive: IconSearch        },
+  { href: '/interaja',  label: 'Interaja',  Icon: IconSparkles, IconActive: IconSparkles, featured: true },
+  { href: '/mapa',      label: 'Mapa',      Icon: IconMapPin,   IconActive: IconMapPinFilled  },
+  { href: '/vantagens', label: 'Vantagens', Icon: IconTag,      IconActive: IconTagFilled     },
+]
 
 export default function BottomNav() {
   const pathname = usePathname()
@@ -22,19 +40,53 @@ export default function BottomNav() {
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}
     >
-      <div className="flex items-center justify-around h-[60px]">
-        {TABS.map(({ href, label, Icon }) => {
+      <div className="flex items-end justify-around h-[64px] relative">
+        {TABS.map((tab) => {
           const active =
-            href === '/' ? pathname === '/' : pathname.startsWith(href)
+            tab.href === '/' ? pathname === '/' : pathname.startsWith(tab.href)
+          const IconComp = active ? tab.IconActive : tab.Icon
+
+          if (tab.featured) {
+            return (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className="flex flex-col items-center flex-1 h-full press-scale relative"
+              >
+                {/* Elevated gradient button */}
+                <div
+                  className="absolute -top-5 w-14 h-14 rounded-full flex items-center justify-center shadow-lg"
+                  style={{
+                    background:
+                      'conic-gradient(from 0deg at 50% 50%, #5500CC, #E91E8C, #F97316, #5500CC)',
+                    boxShadow:
+                      '0 8px 24px -4px rgba(85, 0, 204, 0.5), 0 2px 6px rgba(233, 30, 140, 0.3)',
+                  }}
+                >
+                  <div className="w-[52px] h-[52px] rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                    <IconSparkles size={26} stroke={2.4} className="text-white drop-shadow" />
+                  </div>
+                </div>
+                <span
+                  className={`absolute bottom-2 text-[10px] font-semibold leading-none ${
+                    active ? 'text-brand' : 'text-tx-tertiary'
+                  }`}
+                >
+                  {tab.label}
+                </span>
+              </Link>
+            )
+          }
+
           return (
             <Link
-              key={href}
-              href={href}
-              className="flex flex-col items-center justify-center gap-0.5 flex-1 h-full press-scale"
+              key={tab.href}
+              href={tab.href}
+              className="flex flex-col items-center justify-center gap-1 flex-1 h-full press-scale pt-2"
             >
-              <Icon
+              <IconComp
                 size={22}
-                strokeWidth={active ? 2.5 : 1.8}
+                stroke={active ? 2.2 : 1.7}
                 className={active ? 'text-brand' : 'text-tx-tertiary'}
               />
               <span
@@ -42,7 +94,7 @@ export default function BottomNav() {
                   active ? 'text-brand' : 'text-tx-tertiary'
                 }`}
               >
-                {label}
+                {tab.label}
               </span>
             </Link>
           )
