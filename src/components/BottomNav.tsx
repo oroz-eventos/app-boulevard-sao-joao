@@ -31,10 +31,18 @@ const TABS: Tab[] = [
 
 export default function BottomNav() {
   const pathname = usePathname()
+  const immersive = pathname.startsWith('/feed')
+
+  const activeColor = immersive ? 'text-white' : 'text-brand'
+  const inactiveColor = immersive ? 'text-white/55' : 'text-tx-tertiary'
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full bg-white border-t border-app-divider z-50"
+      className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full z-50 transition-colors ${
+        immersive
+          ? 'bg-gradient-to-t from-black/80 to-transparent border-transparent'
+          : 'bg-white border-t border-app-divider'
+      }`}
       style={{
         maxWidth: 'var(--max-app-width)',
         paddingBottom: 'env(safe-area-inset-bottom)',
@@ -69,7 +77,7 @@ export default function BottomNav() {
                 </div>
                 <span
                   className={`absolute bottom-2 text-[10px] font-semibold leading-none ${
-                    active ? 'text-brand' : 'text-tx-tertiary'
+                    active ? activeColor : inactiveColor
                   }`}
                 >
                   {tab.label}
@@ -87,11 +95,11 @@ export default function BottomNav() {
               <IconComp
                 size={22}
                 stroke={active ? 2.2 : 1.7}
-                className={active ? 'text-brand' : 'text-tx-tertiary'}
+                className={active ? activeColor : inactiveColor}
               />
               <span
                 className={`text-[10px] font-medium leading-none ${
-                  active ? 'text-brand' : 'text-tx-tertiary'
+                  active ? activeColor : inactiveColor
                 }`}
               >
                 {tab.label}
