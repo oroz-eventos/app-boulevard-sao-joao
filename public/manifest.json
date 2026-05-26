@@ -1,25 +1,39 @@
 {
   "name": "Boulevard São João",
-  "short_name": "Boulevard",
-  "description": "Protótipo mobile do Boulevard São João com programação, mapa, comércios e interações.",
-  "start_url": "/app-boulevard-sao-joao/",
-  "scope": "/app-boulevard-sao-joao/",
+  "short_name": "Boulevard SP",
+  "description": "Cultura, gastronomia e experiências na rua",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#5500CC",
   "background_color": "#F9F9FB",
+  "theme_color": "#5500CC",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "lifestyle", "travel"],
+  "lang": "pt-BR",
   "icons": [
     {
-      "src": "/app-boulevard-sao-joao/icon-192.png",
-      "sizes": "192x192",
+      "src": "/icon-192.png",
       "type": "image/png",
+      "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/app-boulevard-sao-joao/icon-512.png",
-      "sizes": "512x512",
+      "src": "/icon-512.png",
       "type": "image/png",
+      "sizes": "512x512",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Programação",
+      "url": "/programacao",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mapa",
+      "url": "/mapa",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
