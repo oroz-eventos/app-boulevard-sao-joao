@@ -259,6 +259,7 @@ export function MapaCanvas({
         onPanResponderTerminate: () => {
           gestureRef.current = { mode: 'idle' }
         },
+        onPanResponderTerminationRequest: () => false,
       }),
     [baseScale, viewport.height, viewport.width]
   )
@@ -284,7 +285,6 @@ export function MapaCanvas({
   return (
     <View style={styles.root}>
       <View
-        style={styles.viewport}
         onLayout={(event) => {
           const { width, height } = event.nativeEvent.layout
           setViewport({ width, height })
