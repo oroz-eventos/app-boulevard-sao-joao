@@ -1,0 +1,57 @@
+{
+  "expo": {
+    "name": "Boulevard São João",
+    "slug": "boulevard-sao-joao",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon-clear.png",
+    "scheme": "boulevard",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F9F9FB"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.boulevard.saojoao",
+      "icon": {
+        "light": "./assets/images/icon-clear.png",
+        "dark": "./assets/images/icon-dark.png"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon-clear.png",
+        "backgroundColor": "#F9F9FB"
+      },
+      "icon": "./assets/images/icon-clear.png",
+      "package": "com.boulevard.saojoao"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/icon-clear.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "newArchEnabled": true
+          },
+          "android": {
+            "newArchEnabled": true
+          }
+        }
+      ],
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

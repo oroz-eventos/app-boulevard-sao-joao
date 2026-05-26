@@ -1,0 +1,76 @@
+import { defaultConfig } from '@tamagui/config/v5'
+import { colors, colorsDark } from './colors'
+
+const lightBase = defaultConfig.themes.light
+const darkBase = defaultConfig.themes.dark
+
+export const lightTheme = {
+  ...lightBase,
+  background: colors.bg.app,
+  backgroundHover: colors.bg.surface2,
+  backgroundPress: colors.bg.divider,
+  backgroundFocus: colors.bg.app,
+  color: colors.text.primary,
+  colorHover: colors.text.primary,
+  colorPress: colors.text.secondary,
+  colorFocus: colors.text.primary,
+  borderColor: colors.bg.divider,
+  borderColorHover: colors.bg.divider,
+  brand: colors.primary.main,
+  brandHover: colors.primary.clear,
+  brandPress: colors.primary.shadow,
+  brandFocus: colors.primary.clear,
+  brandForeground: colors.text.inverse,
+  accent: colors.accent.accent2,
+  accentHover: colors.accent.accent3,
+  accentForeground: colors.text.inverse,
+  surface: colors.bg.surface2,
+  surfaceHover: colors.bg.divider,
+  surfacePress: colors.bg.divider,
+  sectionHeader: colors.bg.surface2,
+  tickerBg: colors.primary.shadow,
+  liveBadge: colors.accent.accent2,
+  muted: colors.text.tertiary,
+  mutedForeground: colors.text.disabled,
+  shadowColor: 'rgba(85, 0, 204, 0.1)',
+  tabBar: colors.bg.app,
+  tabBarActive: colors.primary.main,
+}
+
+export const darkTheme = {
+  ...darkBase,
+  background: colorsDark.bg.app,
+  backgroundHover: colorsDark.bg.surface2,
+  backgroundPress: colorsDark.bg.divider,
+  backgroundFocus: colorsDark.bg.app,
+  color: colorsDark.text.primary,
+  colorHover: colorsDark.text.primary,
+  colorPress: colorsDark.text.secondary,
+  colorFocus: colorsDark.text.primary,
+  borderColor: colorsDark.bg.divider,
+  borderColorHover: colorsDark.bg.divider,
+  brand: colorsDark.primary.main,
+  brandHover: colorsDark.primary.clear,
+  brandPress: colorsDark.primary.shadow,
+  brandFocus: colorsDark.primary.clear,
+  brandForeground: colorsDark.text.inverse,
+  accent: colorsDark.accent.accent2,
+  accentHover: colorsDark.accent.accent3,
+  accentForeground: colorsDark.text.inverse,
+  surface: colorsDark.bg.white,
+  surfaceHover: colorsDark.bg.surface2,
+  surfacePress: colorsDark.bg.divider,
+  sectionHeader: colorsDark.bg.white,
+  tickerBg: colorsDark.primary.shadow,
+  liveBadge: colorsDark.accent.accent2,
+  muted: colorsDark.text.tertiary,
+  mutedForeground: colorsDark.text.disabled,
+  shadowColor: 'rgba(0, 0, 0, 0.35)',
+  tabBar: colorsDark.bg.app,
+  tabBarActive: colorsDark.primary.main,
+}
+
+export const appThemes = {
+  light: lightTheme,
+  dark: darkTheme,
+} as const

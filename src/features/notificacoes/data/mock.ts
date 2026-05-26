@@ -1,0 +1,82 @@
+import type { NotificationFilter, NotificationItem } from '../types'
+
+export const NOTIFICATION_FILTERS: NotificationFilter[] = [
+  { id: 'todas', label: 'Todas' },
+  { id: 'novas', label: 'Novas' },
+  { id: 'lidas', label: 'Lidas' },
+]
+
+export const NOTIFICATION_ITEMS: NotificationItem[] = [
+  {
+    id: 'notif-1',
+    title: 'Feira aberta no Boulevard',
+    description: 'A feira já começou e as barracas de orgânicos estão funcionando até 18h.',
+    timeAgo: 'Agora',
+    status: 'new',
+    kind: 'feira',
+    tone: 'green',
+  },
+  {
+    id: 'notif-2',
+    title: 'Novo cupom em Vantagens',
+    description: 'O Café Passarola liberou um desconto relâmpago para pedidos feitos hoje.',
+    timeAgo: 'há 8 min',
+    status: 'new',
+    kind: 'vantagens',
+    tone: 'brand',
+  },
+  {
+    id: 'notif-3',
+    title: 'Show confirmado no Palco 1',
+    description: 'Ju Moraes sobe ao palco às 18h com roda de samba e participação especial.',
+    timeAgo: 'há 23 min',
+    status: 'new',
+    kind: 'programacao',
+    tone: 'orange',
+  },
+  {
+    id: 'notif-4',
+    title: 'Mapa atualizado',
+    description: 'Os acessos da ala leste foram reorganizados e já aparecem no mapa do app.',
+    timeAgo: 'há 41 min',
+    status: 'new',
+    kind: 'mapa',
+    tone: 'blue',
+  },
+  {
+    id: 'notif-5',
+    title: 'Nova loja participante',
+    description: 'A Botânica Urbana entrou na curadoria com lançamentos de autocuidado natural.',
+    timeAgo: 'há 1 h',
+    status: 'read',
+    kind: 'lojas',
+    tone: 'pink',
+  },
+  {
+    id: 'notif-6',
+    title: 'Aviso da organização',
+    description: 'Leve documento para retirar brindes e ativações nas experiências do boulevard.',
+    timeAgo: 'há 2 h',
+    status: 'read',
+    kind: 'aviso',
+    tone: 'brand',
+  },
+  {
+    id: 'notif-7',
+    title: 'Oficina com vagas finais',
+    description: 'A oficina de cerâmica na tenda 8 está com poucas inscrições restantes.',
+    timeAgo: 'há 3 h',
+    status: 'read',
+    kind: 'programacao',
+    tone: 'orange',
+  },
+  {
+    id: 'notif-8',
+    title: 'Entrada mais tranquila na Praça Sul',
+    description: 'O fluxo na área gastronômica está leve neste momento, com filas curtas.',
+    timeAgo: 'há 5 h',
+    status: 'read',
+    kind: 'feira',
+    tone: 'green',
+  },
+]
