@@ -4,6 +4,7 @@ import './globals.css'
 import BottomNav from '@/src/components/BottomNav'
 import ServiceWorkerRegistrar from '@/src/components/ServiceWorkerRegistrar'
 import SplashScreen from '@/src/components/SplashScreen'
+import PWAInstallPrompt from '@/src/components/PWAInstallPrompt'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -55,6 +56,7 @@ export default function RootLayout({
             {children}
           </main>
           <BottomNav />
+          <PWAInstallPrompt />
         </div>
       </body>
     </html>

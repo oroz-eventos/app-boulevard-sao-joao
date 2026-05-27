@@ -154,6 +154,21 @@ export default function SobrePage() {
             <p className="text-[10px] font-bold uppercase tracking-wider opacity-85">Calendário</p>
             <p className="font-bold text-[14px] mt-1">12 grandes eventos</p>
           </Link>
+          <Link
+            href="/lugares"
+            className="rounded-2xl bg-accent-2 text-white p-4 press-scale"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-wider opacity-85">Patrimônio</p>
+            <p className="font-bold text-[14px] mt-1">Lugares restaurados</p>
+          </Link>
+          <Link
+            href="/circuitos"
+            className="rounded-2xl text-white p-4 press-scale"
+            style={{ backgroundColor: '#774DE8' }}
+          >
+            <p className="text-[10px] font-bold uppercase tracking-wider opacity-85">Plataforma</p>
+            <p className="font-bold text-[14px] mt-1">5 circuitos integrados</p>
+          </Link>
         </section>
       </div>
     </div>

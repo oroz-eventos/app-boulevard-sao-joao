@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
 import { Heart, Tag } from 'lucide-react'
-import { ADVANTAGE_OFFERS, OFFER_FILTER_TABS, type OfferStatus } from '@/src/lib/data/vantagens'
+import { ADVANTAGE_OFFERS, OFFER_FILTER_TABS, type OfferStatus, type AdvantageOffer } from '@/src/lib/data/vantagens'
 import PageHeader from '@/src/components/PageHeader'
+import ApadrinharDrawer from '@/src/features/vantagens/ApadrinharDrawer'
 
 const STATUS_STYLE: Record<OfferStatus, { bg: string; text: string; label: string }> = {
   new:       { bg: 'bg-brand-light', text: 'text-brand',     label: 'Novo' },
@@ -13,6 +14,7 @@ const STATUS_STYLE: Record<OfferStatus, { bg: string; text: string; label: strin
 
 export default function VantagensPage() {
   const [tab, setTab] = useState('todos')
+  const [apadrinharOffer, setApadrinharOffer] = useState<AdvantageOffer | null>(null)
 
   const filtered =
     tab === 'todos'
@@ -102,7 +104,10 @@ export default function VantagensPage() {
                   )}
                 </div>
                 {isSolidario ? (
-                  <button className="shrink-0 bg-pink-600 text-white text-[12px] font-semibold px-3 py-1.5 rounded-full press-scale flex items-center gap-1">
+                  <button
+                    onClick={() => setApadrinharOffer(offer)}
+                    className="shrink-0 bg-pink-600 text-white text-[12px] font-semibold px-3 py-1.5 rounded-full press-scale flex items-center gap-1"
+                  >
                     <Heart size={12} fill="white" />
                     Apadrinhar
                   </button>
@@ -116,6 +121,12 @@ export default function VantagensPage() {
           )
         })}
       </div>
+
+      <ApadrinharDrawer
+        open={apadrinharOffer !== null}
+        onClose={() => setApadrinharOffer(null)}
+        offer={apadrinharOffer}
+      />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { CheckCheck, BellOff } from 'lucide-react'
 import {
   IconCamera,
   IconBrain,
@@ -45,16 +46,43 @@ const ICON_MAP: Record<NotificationKind, typeof IconCamera> = {
   'natal':      IconChristmasTree,
 }
 
+const HOJE_REGEX = /^(agora|há \d+ min|há \d+ h)$/i
+
+function isHoje(item: NotificationItem) {
+  return HOJE_REGEX.test(item.timeAgo)
+}
+
 export default function NotificacoesPage() {
   const [filter, setFilter] = useState('todas')
+  const [readSet, setReadSet] = useState<Set<string>>(new Set())
+  const [dismissedSet, setDismissedSet] = useState<Set<string>>(new Set())
 
-  const items = filter === 'todas'
-    ? NOTIFICATION_ITEMS
-    : NOTIFICATION_ITEMS.filter((n) =>
-        filter === 'novas' ? n.status === 'new' : n.status === 'read'
+  const items = useMemo(() => {
+    return NOTIFICATION_ITEMS.filter((n) => !dismissedSet.has(n.id))
+      .map((n) => ({
+        ...n,
+        status: readSet.has(n.id) ? ('read' as const) : n.status,
+      }))
+      .filter((n) =>
+        filter === 'todas'
+          ? true
+          : filter === 'novas'
+            ? n.status === 'new'
+            : n.status === 'read'
       )
+  }, [filter, readSet, dismissedSet])
 
-  const novasCount = NOTIFICATION_ITEMS.filter((n) => n.status === 'new').length
+  const novasCount = NOTIFICATION_ITEMS.filter(
+    (n) => !dismissedSet.has(n.id) && !readSet.has(n.id) && n.status === 'new'
+  ).length
+
+  const hoje = items.filter(isHoje)
+  const anteriores = items.filter((n) => !isHoje(n))
+
+  const handleMarkAllRead = () => {
+    const all = new Set(NOTIFICATION_ITEMS.filter((n) => n.status === 'new').map((n) => n.id))
+    setReadSet(all)
+  }
 
   return (
     <div className="animate-fade-in">
@@ -65,42 +93,92 @@ export default function NotificacoesPage() {
       />
 
       {/* Filter tabs */}
-      <div className="flex gap-0 border-b border-app-divider overflow-x-auto scrollbar-hide px-4">
-        {NOTIFICATION_FILTERS.map((f) => (
+      <div className="flex items-center justify-between border-b border-app-divider px-4">
+        <div className="flex gap-0 overflow-x-auto scrollbar-hide">
+          {NOTIFICATION_FILTERS.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`shrink-0 px-4 py-2.5 text-[12px] font-semibold border-b-2 transition-colors ${
+                filter === f.id
+                  ? 'border-brand text-brand'
+                  : 'border-transparent text-tx-tertiary'
+              }`}
+            >
+              {f.label}
+              {f.id === 'novas' && novasCount > 0 && (
+                <span className="ml-1.5 bg-brand text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">
+                  {novasCount}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+        {novasCount > 0 && (
           <button
-            key={f.id}
-            onClick={() => setFilter(f.id)}
-            className={`shrink-0 px-4 py-2.5 text-[12px] font-semibold border-b-2 transition-colors ${
-              filter === f.id
-                ? 'border-brand text-brand'
-                : 'border-transparent text-tx-tertiary'
-            }`}
+            onClick={handleMarkAllRead}
+            className="text-[11px] font-semibold text-brand flex items-center gap-1 press-scale"
           >
-            {f.label}
-            {f.id === 'novas' && novasCount > 0 && (
-              <span className="ml-1.5 bg-brand text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">
-                {novasCount}
-              </span>
-            )}
+            <CheckCheck size={12} />
+            Marcar lidas
           </button>
-        ))}
-      </div>
-
-      <div className="px-4 pt-4 space-y-2.5 pb-4">
-        {items.map((notif) => (
-          <NotifRow key={notif.id} notif={notif} />
-        ))}
-        {items.length === 0 && (
-          <p className="text-center text-tx-tertiary text-[14px] py-12">
-            Sem notificações nesta categoria.
-          </p>
         )}
       </div>
+
+      {items.length === 0 ? (
+        <div className="px-4 pt-12 text-center">
+          <div className="w-14 h-14 mx-auto rounded-full bg-app-surface flex items-center justify-center mb-3">
+            <BellOff size={22} className="text-tx-tertiary" />
+          </div>
+          <p className="text-[14px] font-semibold text-tx-primary">Tudo em dia</p>
+          <p className="text-[12px] text-tx-tertiary mt-1">
+            Sem notificações nesta categoria.
+          </p>
+        </div>
+      ) : (
+        <div className="pb-4">
+          {hoje.length > 0 && (
+            <NotifGroup title="Hoje" items={hoje} onDismiss={(id) => setDismissedSet(new Set([...dismissedSet, id]))} />
+          )}
+          {anteriores.length > 0 && (
+            <NotifGroup title="Anteriores" items={anteriores} onDismiss={(id) => setDismissedSet(new Set([...dismissedSet, id]))} />
+          )}
+        </div>
+      )}
     </div>
   )
 }
 
-function NotifRow({ notif }: { notif: NotificationItem }) {
+function NotifGroup({
+  title,
+  items,
+  onDismiss,
+}: {
+  title: string
+  items: NotificationItem[]
+  onDismiss: (id: string) => void
+}) {
+  return (
+    <section className="px-4 pt-4">
+      <p className="text-[10px] font-bold uppercase tracking-wider text-tx-tertiary mb-2">
+        {title}
+      </p>
+      <div className="space-y-2.5">
+        {items.map((notif) => (
+          <NotifRow key={notif.id} notif={notif} onDismiss={onDismiss} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function NotifRow({
+  notif,
+  onDismiss,
+}: {
+  notif: NotificationItem
+  onDismiss: (id: string) => void
+}) {
   const Icon = ICON_MAP[notif.kind]
   const tone = KIND_TONE[notif.kind]
   const isNew = notif.status === 'new'
@@ -111,12 +189,10 @@ function NotifRow({ notif }: { notif: NotificationItem }) {
         isNew ? 'border-brand/20' : 'border-app-divider'
       }`}
     >
-      {/* Unread dot */}
       {isNew && (
         <span className="absolute top-3 right-3 w-2 h-2 rounded-full bg-brand" />
       )}
 
-      {/* Contextual icon */}
       <div
         className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
         style={{ backgroundColor: tone.bg }}
@@ -154,11 +230,22 @@ function NotifRow({ notif }: { notif: NotificationItem }) {
     </div>
   )
 
-  return notif.href ? (
-    <Link href={notif.href} className="block">
-      {Inner}
-    </Link>
-  ) : (
-    Inner
+  return (
+    <div className="relative group">
+      {notif.href ? (
+        <Link href={notif.href} className="block">
+          {Inner}
+        </Link>
+      ) : (
+        Inner
+      )}
+      <button
+        onClick={() => onDismiss(notif.id)}
+        className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border border-app-divider text-tx-tertiary text-[14px] leading-none flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity press-scale"
+        aria-label="Dispensar"
+      >
+        ×
+      </button>
+    </div>
   )
 }
