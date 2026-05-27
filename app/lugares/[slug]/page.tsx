@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Wrench, Building2 } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
+import EventActions from '@/src/components/EventActions'
 import { LUGARES, lugarBySlug } from '@/src/lib/data/lugares'
 
 export function generateStaticParams() {
@@ -50,6 +51,13 @@ export default async function LugarDetail({ params }: { params: Promise<{ slug: 
         >
           Abrir no mapa
         </Link>
+        <div className="mt-2">
+          <EventActions
+            title={lugar.title}
+            accent="#5500CC"
+            shareText={`Conheça o ${lugar.title} no Boulevard São João — ${lugar.shortDescription}`}
+          />
+        </div>
 
         {/* Obras */}
         <section className="mt-6">
