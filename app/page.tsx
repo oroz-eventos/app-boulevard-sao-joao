@@ -96,11 +96,11 @@ export default function HomePage() {
         <HomeGrandesEventos />
       </section>
 
-      {/* 5 Circuitos integrados */}
+      {/* 7 Circuitos */}
       <section className="pt-6">
         <div className="px-4 mb-3 flex items-center justify-between">
           <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
-            5 circuitos integrados
+            7 circuitos do Boulevard
           </h2>
           <Link href="/circuitos" className="text-[12px] font-semibold text-brand press-scale">
             Ver todos

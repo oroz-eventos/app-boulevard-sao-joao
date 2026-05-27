@@ -231,7 +231,7 @@ function AlbumMock({ slide }: { slide: InteracaoSlide }) {
 
 function WishlistMock({ slide }: { slide: InteracaoSlide }) {
   const itens = [
-    { label: 'Camiseta upcycle · Tribus', valor: 'R$ 89' },
+    { label: 'Camiseta upcycle · Tribos Aoás', valor: 'R$ 89' },
     { label: 'Capa de tablet em couro reciclado', valor: 'R$ 145' },
     { label: 'Kit zero-waste cozinha', valor: 'R$ 76' },
   ]

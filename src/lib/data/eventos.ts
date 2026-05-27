@@ -160,10 +160,10 @@ export const GRANDES_EVENTOS: GrandeEvento[] = [
     themeColor: '#F97316',
     highlights: [
       {
-        title: 'Feira Tribus',
-        shortLine: 'Tribus · feira criativa com 30+ empreendedores negros',
+        title: 'Feira Tribos Aoás',
+        shortLine: 'Tribos Aoás · feira criativa com 30+ empreendedores negros',
         description:
-          'Feira criativa com gastronomia afro, tranças, acessórios e moda autoral. Mais de 30 empreendedores negros locais com curadoria assinada pelo programa Tribus. Patrocínio exclusivo da cota pilar ESG.',
+          'Feira criativa com gastronomia afro, tranças, acessórios e moda autoral. Mais de 30 empreendedores negros locais com curadoria assinada pelo programa Tribos Aoás. Patrocínio exclusivo da cota pilar ESG.',
         schedule: 'Sáb e Dom · 10h–22h',
         local: 'Eixo central do calçadão',
       },

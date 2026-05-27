@@ -27,7 +27,7 @@ export default function HomeCircuitos() {
               {c.numero}
             </div>
             <div className="absolute bottom-2 left-2 right-2">
-              <p className="text-white font-bold text-[12px] leading-tight">{c.title.replace('Circuito ', '')}</p>
+              <p className="text-white font-bold text-[12px] leading-tight">{c.shortTitle}</p>
             </div>
           </div>
         </Link>

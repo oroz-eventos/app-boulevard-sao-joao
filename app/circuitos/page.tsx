@@ -6,17 +6,18 @@ import { CIRCUITOS } from '@/src/lib/data/circuitos'
 export default function CircuitosListPage() {
   return (
     <div className="animate-fade-in">
-      <PageHeader title="5 Circuitos" subtitle="A plataforma integrada do Boulevard" showBack />
+      <PageHeader title="7 Circuitos" subtitle="A plataforma integrada do Boulevard" showBack />
 
       {/* Manifesto */}
       <div className="mx-4 mt-4 rounded-2xl bg-brand-shadow p-5 text-white">
-        <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">Plataforma integrada</p>
+        <p className="text-[10px] font-bold uppercase tracking-wider opacity-80">Sustentação do Boulevard</p>
         <h2 className="text-[18px] font-black mt-1 leading-tight">
-          Cinco circuitos, um único coração urbano.
+          Sete circuitos, um único coração urbano.
         </h2>
         <p className="text-[12px] text-white/85 mt-1.5 leading-snug">
-          Cinco trilhas permanentes, independentes em conteúdo e integradas em operação. Cada marca
-          cofundadora pode adotar um circuito de alta afinidade.
+          A vida no calçadão acontece todos os sábados e domingos. Sete trilhas permanentes que
+          habituam o paulistano a reocupar o Centro como espaço regular de lazer, cultura e
+          convivência familiar.
         </p>
       </div>
 

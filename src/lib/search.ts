@@ -88,7 +88,8 @@ export function search(query: string): SearchResult[] {
 
   // Circuitos
   for (const c of CIRCUITOS) {
-    const bag = norm(`${c.title} ${c.tagline} ${c.summary} ${c.ativacoes.join(' ')}`)
+    const ativacoesBag = c.ativacoes.map((a) => `${a.title} ${a.description}`).join(' ')
+    const bag = norm(`${c.title} ${c.shortTitle} ${c.tagline} ${c.summary} ${ativacoesBag}`)
     if (bag.includes(q)) {
       matches.push({
         id: `circuito-${c.slug}`,

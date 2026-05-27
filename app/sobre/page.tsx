@@ -1,6 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Building2, HeartHandshake, Palette, Leaf, Sprout } from 'lucide-react'
+import {
+  Building2, HeartHandshake, Palette, Sprout,
+  Armchair, Bath, Accessibility, DoorOpen,
+} from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 
 const PILARES = [
@@ -97,6 +100,36 @@ export default function SobrePage() {
                   <p className="text-[11px] text-tx-secondary mt-1 leading-snug">
                     {p.description}
                   </p>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Hospitalidade e Infraestrutura */}
+        <section className="mt-6">
+          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
+            Hospitalidade e infraestrutura
+          </h2>
+          <p className="text-[12px] text-tx-tertiary mb-3 leading-relaxed">
+            Conjunto de elementos de design urbano e conforto que acolhe as pessoas na avenida,
+            incentivando permanência e circulação.
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { icon: DoorOpen,       title: 'Pórticos & Receptivos',     desc: 'Pórticos temporários leves, balcões de informação e receptivos de boas-vindas em pontos-chave.' },
+              { icon: Armchair,       title: 'Bancos & Parklets',         desc: 'Bancos modulares de madeira, parklets cênicos com vegetação e áreas pra carregar celular.' },
+              { icon: Accessibility,  title: 'Sinalização inclusiva',     desc: 'Totens bidirecionais, mapas em braille e sinalização colorida por eixos de circuito.' },
+              { icon: Bath,           title: 'Banheiros ABRASEL',         desc: 'Convênio com estabelecimentos da ABRASEL-SP — higiene de alto nível integrada ao comércio local.' },
+            ].map((h) => {
+              const Icon = h.icon
+              return (
+                <div key={h.title} className="bg-white rounded-2xl border border-app-divider p-3">
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-brand-light">
+                    <Icon size={18} className="text-brand" />
+                  </div>
+                  <p className="font-bold text-[13px] text-tx-primary mt-2 leading-tight">{h.title}</p>
+                  <p className="text-[11px] text-tx-secondary mt-1 leading-snug">{h.desc}</p>
                 </div>
               )
             })}

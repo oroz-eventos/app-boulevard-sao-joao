@@ -16,7 +16,12 @@ export default async function CircuitoDetail({ params }: { params: Promise<{ slu
 
   return (
     <div className="animate-fade-in">
-      <PageHeader title={`Circuito ${c.numero}`} subtitle="Plataforma integrada" showBack backHref="/circuitos" />
+      <PageHeader
+        title={`Circuito ${c.numero}`}
+        subtitle={c.shortTitle}
+        showBack
+        backHref="/circuitos"
+      />
 
       {/* Hero */}
       <div className="relative h-56">
@@ -29,7 +34,7 @@ export default async function CircuitoDetail({ params }: { params: Promise<{ slu
         />
         <div className="absolute bottom-3 left-4 right-4">
           <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-white/90 bg-white/15 backdrop-blur-md px-2.5 py-1 rounded-full">
-            CIRCUITO {c.numero} · permanente
+            CIRCUITO {c.numero}
           </span>
           <h1 className="text-white font-black text-[24px] leading-tight mt-2">{c.title}</h1>
           <p className="text-white/90 text-[13px] mt-0.5">{c.tagline}</p>
@@ -42,23 +47,21 @@ export default async function CircuitoDetail({ params }: { params: Promise<{ slu
         {/* Ativações */}
         <section className="mt-6">
           <h3 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
-            Ativações principais
+            O que rola nesse circuito
           </h3>
-          <div className="bg-white rounded-2xl border border-app-divider overflow-hidden">
+          <div className="space-y-2">
             {c.ativacoes.map((a, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-3 p-3 ${
-                  i !== c.ativacoes.length - 1 ? 'border-b border-app-divider' : ''
-                }`}
-              >
+              <div key={i} className="bg-white rounded-2xl border border-app-divider p-3 flex items-start gap-3">
                 <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                  className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                   style={{ backgroundColor: c.accentColor + '20' }}
                 >
-                  <Sparkles size={14} style={{ color: c.accentColor }} />
+                  <Sparkles size={16} style={{ color: c.accentColor }} />
                 </div>
-                <p className="text-[13px] text-tx-primary leading-snug pt-1">{a}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-[13px] text-tx-primary leading-tight">{a.title}</p>
+                  <p className="text-[12px] text-tx-secondary mt-1 leading-snug">{a.description}</p>
+                </div>
               </div>
             ))}
           </div>

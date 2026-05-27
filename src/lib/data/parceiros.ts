@@ -68,7 +68,7 @@ export const PARCEIROS: Parceiro[] = [
     tier: 'pilar',
     label: 'PILAR ESG',
     vertical: 'ESG & Acessibilidade',
-    description: 'Hospitalidade Acessível + 10 Jovens Guias + 02 Ceias Solidárias (SP Invisível) + Feiras Tribus do Festival Black.',
+    description: 'Hospitalidade Acessível + 10 Jovens Guias + 02 Ceias Solidárias (SP Invisível) + Feiras Tribos Aoás do Festival Black.',
     valor: COTA_INVESTMENT.pilar,
     accentColor: '#16A34A',
   },

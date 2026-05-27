@@ -43,7 +43,7 @@ export const ADVANTAGE_OFFERS: AdvantageOffer[] = [
     discountLabel: 'EMPREGABILIDADE',
     condition:
       'Patrocine 1 dia de trabalho de pessoa em vulnerabilidade na produção e zeladoria do Boulevard.',
-    venue: 'Programa Tribus · Boulevard',
+    venue: 'Programa Tribos Aoás · Boulevard',
     expiresLabel: 'Ativo o ano todo',
     doacaoSugerida: 120,
   },
