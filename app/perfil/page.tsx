@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {
   Settings, Trophy, Heart, Tag, Image as ImageIcon, Bell,
-  Info, LogOut, ChevronRight,
+  Info, LogOut, ChevronRight, Accessibility,
 } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 
@@ -22,9 +22,10 @@ const SECTIONS: { items: { icon: typeof Heart; label: string; href: string }[] }
   },
   {
     items: [
-      { icon: Bell,       label: 'Notificações',          href: '/notificacoes' },
-      { icon: Settings,   label: 'Preferências',          href: '/perfil' },
-      { icon: Info,       label: 'Sobre o projeto',       href: '/sobre' },
+      { icon: Bell,           label: 'Notificações',          href: '/notificacoes' },
+      { icon: Accessibility,  label: 'Acessibilidade',        href: '/acessibilidade' },
+      { icon: Settings,       label: 'Preferências',          href: '/perfil' },
+      { icon: Info,           label: 'Sobre o projeto',       href: '/sobre' },
     ],
   },
 ]

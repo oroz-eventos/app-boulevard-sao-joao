@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Bell, Clock, MapPin, Tag, Calendar, Share2 } from 'lucide-react'
+import { Clock, MapPin, Tag, Calendar } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
+import EventActions from '@/src/components/EventActions'
 import {
   PROGRAMACAO_EVENTS,
   PROGRAMACAO_DAYS,
@@ -92,18 +93,12 @@ export default async function ProgramacaoDetail({ params }: { params: Promise<{ 
         </div>
 
         {/* CTAs */}
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <button
-            className="rounded-xl py-3 text-white font-semibold text-[13px] flex items-center justify-center gap-1.5 press-scale"
-            style={{ backgroundColor: accent }}
-          >
-            <Bell size={14} />
-            Lembrete
-          </button>
-          <button className="rounded-xl py-3 bg-white border border-app-divider text-tx-primary font-semibold text-[13px] flex items-center justify-center gap-1.5 press-scale">
-            <Share2 size={14} />
-            Compartilhar
-          </button>
+        <div className="mt-4">
+          <EventActions
+            title={event.title}
+            accent={accent}
+            shareText={`${event.title} · ${event.badge} no Boulevard São João`}
+          />
         </div>
 
         <Link

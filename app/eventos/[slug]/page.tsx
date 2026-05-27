@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Bell } from 'lucide-react'
+import { Calendar, MapPin } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
+import EventActions from '@/src/components/EventActions'
 import { GRANDES_EVENTOS, eventoBySlug } from '@/src/lib/data/eventos'
 import HighlightsList from '@/src/features/eventos/HighlightsList'
 
@@ -51,17 +52,15 @@ export default async function EventoDetail({ params }: { params: Promise<{ slug:
         <p className="text-[14px] text-tx-primary leading-relaxed">{evento.summary}</p>
 
         {/* CTAs */}
-        <div className="grid grid-cols-2 gap-2 mt-4">
-          <button
-            className="rounded-xl py-3 text-white font-semibold text-[13px] flex items-center justify-center gap-1.5 press-scale"
-            style={{ backgroundColor: evento.themeColor }}
-          >
-            <Bell size={14} />
-            Lembrete
-          </button>
+        <div className="mt-4">
+          <EventActions
+            title={evento.title}
+            accent={evento.themeColor}
+            shareText={`${evento.title} · ${evento.tagline}`}
+          />
           <Link
             href="/mapa"
-            className="rounded-xl py-3 bg-white border border-app-divider text-tx-primary font-semibold text-[13px] flex items-center justify-center gap-1.5 press-scale"
+            className="mt-2 rounded-xl py-3 bg-white border border-app-divider text-tx-primary font-semibold text-[13px] flex items-center justify-center gap-1.5 press-scale"
           >
             <MapPin size={14} />
             Ver no mapa
