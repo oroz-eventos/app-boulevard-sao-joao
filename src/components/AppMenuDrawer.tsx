@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import {
   Menu, UserCircle2, Calendar, Building2, Camera, MapPinned,
   Accessibility, HeartHandshake, Bell, Info, LogIn, ChevronRight, Route,
@@ -25,7 +24,7 @@ const SECTIONS: { title: string; items: MenuItem[] }[] = [
       { icon: Calendar,    label: 'Grandes Eventos',  href: '/eventos',       description: '12 macroeventos do calendário', color: '#5500CC', bg: '#EEE5FB' },
       { icon: Route,       label: '7 Circuitos',      href: '/circuitos',     description: 'As trilhas permanentes do calçadão', color: '#774DE8', bg: '#EDE5FB' },
       { icon: MapPinned,   label: 'Lugares',          href: '/lugares',       description: 'Patrimônios e marcos restaurados', color: '#3B5BDB', bg: '#E0E7FB' },
-      { icon: Camera,      label: 'Foto-Opp',         href: '/interaja/foto-opp-personagem-centro', description: 'O Personagem Centro', color: '#E91E8C', bg: '#FCE4F1' },
+      { icon: Camera,      label: 'Envie sua foto',   href: '/interaja/foto-opp-personagem-centro', description: 'Personagem Centro · Espaço Cauby', color: '#E91E8C', bg: '#FCE4F1' },
     ],
   },
   {
@@ -52,45 +51,36 @@ type Props = { trigger?: React.ReactNode }
 export default function AppMenuDrawer({ trigger }: Props) {
   const [open, setOpen] = useState(false)
 
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <>
-      {trigger ? (
-        <button onClick={() => setOpen(true)} className="press-scale" aria-label="Abrir menu">
-          {trigger}
-        </button>
-      ) : (
-        <button
-          onClick={() => setOpen(true)}
-          className="w-9 h-9 flex items-center justify-center rounded-full press-scale"
-          aria-label="Abrir menu"
-        >
-          <Menu size={20} className="text-tx-primary" />
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={handleOpen}
+        className="press-scale"
+        aria-label="Abrir menu"
+      >
+        {trigger ?? (
+          <span className="w-9 h-9 flex items-center justify-center rounded-full">
+            <Menu size={20} className="text-tx-primary" />
+          </span>
+        )}
+      </button>
 
       <BottomDrawer
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         accentColor="#5500CC"
         ariaLabel="Menu do app"
       >
-        <div className="pt-1 pb-2">
-          {/* Brand header */}
-          <div className="flex items-center gap-3 mb-6 pb-4 border-b border-app-divider">
-            <Image src="/logo-mark.png" alt="Boulevard São João" width={40} height={40} priority />
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.1em] text-brand uppercase leading-none">
-                Boulevard
-              </p>
-              <p className="text-[15px] font-bold text-tx-primary leading-tight">
-                São João
-              </p>
-            </div>
-          </div>
-
-          {/* Sections */}
-          {SECTIONS.map((section) => (
-            <section key={section.title} className="mb-5">
+        <div className="pt-4">
+          {SECTIONS.map((section, sIdx) => (
+            <section
+              key={section.title}
+              className={sIdx === 0 ? '' : 'mt-5'}
+            >
               <p className="text-[10px] font-bold uppercase tracking-wider text-tx-tertiary mb-2 px-1">
                 {section.title}
               </p>
@@ -101,7 +91,7 @@ export default function AppMenuDrawer({ trigger }: Props) {
                     <Link
                       key={item.href + item.label}
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={handleClose}
                       className="flex items-center gap-3 p-2 rounded-xl press-scale hover:bg-app-surface transition-colors"
                     >
                       <div
@@ -126,7 +116,7 @@ export default function AppMenuDrawer({ trigger }: Props) {
             </section>
           ))}
 
-          <p className="text-[10px] text-tx-disabled text-center mt-4 pt-4 border-t border-app-divider">
+          <p className="text-[10px] text-tx-disabled text-center mt-6 pt-4 border-t border-app-divider">
             v1.0 · em parceria com Cidade de SP, Fábrica de Bares e LedWave
           </p>
         </div>

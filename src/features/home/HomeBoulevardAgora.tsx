@@ -19,7 +19,7 @@ export default function HomeBoulevardAgora() {
         <div className="flex-1 min-w-0">
           <p className="text-[10px] font-bold uppercase tracking-wide text-brand">Permanente</p>
           <p className="text-[13px] font-semibold text-tx-primary leading-tight">
-            Foto-Opp Personagem Centro liberada
+            Personagem Centro tá liberado pra sua foto
           </p>
           <p className="text-[11px] text-tx-tertiary">Espaço Cauby · 8.402 retratos</p>
         </div>

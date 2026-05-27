@@ -292,7 +292,7 @@ export const MAP_MARKERS: MapMarker[] = [
   {
     id: 'foto-opp-personagem-centro',
     kind: 'sustentacao',
-    title: 'Foto-Opp · O Personagem Centro',
+    title: 'Envie sua foto · O Personagem Centro',
     subtitle: 'Instalação imersiva permanente · casaco cinza, neons, calçada paulista',
     x: 86, y: 16,
     color: KIND_COLORS.sustentacao,

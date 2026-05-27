@@ -39,7 +39,7 @@ export const NOTIFICATION_FILTERS = [
 ]
 
 export const KIND_TONE: Record<NotificationKind, { color: string; bg: string; label: string }> = {
-  'foto-opp':   { color: '#5500CC', bg: '#EEE5FB', label: 'Foto-Opp' },
+  'foto-opp':   { color: '#5500CC', bg: '#EEE5FB', label: 'Envie sua foto' },
   'quiz':       { color: '#3B5BDB', bg: '#E0E7FB', label: 'Quiz' },
   'envio-tela': { color: '#E91E8C', bg: '#FCE4F1', label: 'Telão' },
   'roteiro':    { color: '#774DE8', bg: '#EDE5FB', label: 'Roteiro' },

@@ -9,7 +9,7 @@ import { GRANDES_EVENTOS, eventoDoMes } from './eventos'
 
 export const LIVE_TICKER_ITEMS = [
   'Palco 2 às 19h · Roda de samba paulistana',
-  'Foto-Opp Personagem Centro liberada · veja sua foto no telão Drogaria SP',
+  'Envie sua foto no Personagem Centro · aparece no telão Drogaria SP',
   'Feira Gastronômica & Roda de Samba · sáb 18h–23h',
   'Pista Gelo do Centro aberta nas praças · sáb e dom 14h–22h',
   'Super Quiz da semana liberado · prêmio do Bar Brahma',
@@ -44,9 +44,9 @@ export const CATEGORY_SHORTCUTS: {
   { id: 'prog',      label: 'Programação', icon: 'calendar',  href: '/programacao' },
   { id: 'mapa',      label: 'Mapa',        icon: 'map',       href: '/mapa' },
   { id: 'circuitos', label: 'Circuitos',   icon: 'circuitos', href: '/circuitos' },
-  { id: 'telas',     label: 'Telões',      icon: 'screen',    href: '/feed' },
+  { id: 'tv',        label: 'TV Boulevard',icon: 'screen',    href: '/tv' },
   { id: 'feira',     label: 'Feira',       icon: 'shopping',  href: '/feira' },
-  { id: 'foto-opp',  label: 'Foto-Opp',    icon: 'foto-opp',  href: '/interaja/foto-opp-personagem-centro' },
+  { id: 'foto-opp',  label: 'Envie sua foto', icon: 'foto-opp',  href: '/interaja/foto-opp-personagem-centro' },
   { id: 'quiz',      label: 'Quizzes',     icon: 'quiz',      href: '/interaja' },
   { id: 'vantagens', label: 'Vantagens',   icon: 'gift',      href: '/vantagens' },
 ]
@@ -111,7 +111,7 @@ export const FEATURED = evento
 export const PROMO_SLIDES = [
   {
     id: 'promo-foto-opp',
-    title: 'Foto-Opp · Personagem Centro',
+    title: 'Envie sua foto · Personagem Centro',
     subtitle: 'Casaco cinza, guarda-chuva de metal, neons. Sua foto vai pro telão Drogaria SP.',
     cta: 'Tirar foto',
     backgroundColor: '#5500CC',

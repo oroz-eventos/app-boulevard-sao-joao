@@ -34,7 +34,7 @@ export const INTERACAO_SLIDES: InteracaoSlide[] = [
   {
     id: 'foto-opp-personagem-centro',
     kind: 'foto-opp',
-    title: 'Foto-Opp · O Personagem Centro',
+    title: 'Envie sua foto · O Personagem Centro',
     description:
       'A instalação imersiva no Espaço Cauby — casaco cinza, guarda-chuva de metal, neons e calçada paulista — espera seu retrato. Foto entra na rotação do telão Drogaria SP.',
     statusLabel: 'Permanente · 24h',
@@ -142,7 +142,7 @@ export const INTERAJA_SLIDES = INTERACAO_SLIDES.map((s) => ({
 }))
 
 export const KIND_LABELS: Record<InteracaoKind, string> = {
-  'foto-opp':         '📸 Foto-Opp',
+  'foto-opp':         '📸 Envie sua foto',
   'super-quiz':       '🧠 Super Quiz',
   'envio-tela':       '🎬 Envio pra telão',
   'album-figurinhas': '✨ Álbum',

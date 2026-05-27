@@ -87,7 +87,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
     id: 'p-foto-opp-personagem-centro',
     nivel: 'P',
     grupo: 'sempre-aberto',
-    title: 'Foto-Opp · O Personagem Centro',
+    title: 'Envie sua foto · O Personagem Centro',
     subtitle: 'Instalação imersiva assinada por artista paulistano',
     description:
       'Casaco cinza, guarda-chuva de metal, neons e calçada paulista compõem o personagem-monumento. Pronto pra foto instagramável + envio pra telão.',
