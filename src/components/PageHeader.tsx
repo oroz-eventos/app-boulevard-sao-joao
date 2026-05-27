@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowLeft, Bell } from 'lucide-react'
+import { ArrowLeft, Bell, Menu } from 'lucide-react'
+import AppMenuDrawer from './AppMenuDrawer'
 
 interface PageHeaderProps {
   title: string
@@ -7,6 +8,8 @@ interface PageHeaderProps {
   backHref?: string
   showNotif?: boolean
   subtitle?: string
+  /** Esconde o botão de menu (default: visível) */
+  hideMenu?: boolean
 }
 
 export default function PageHeader({
@@ -15,6 +18,7 @@ export default function PageHeader({
   backHref = '/',
   showNotif = false,
   subtitle,
+  hideMenu = false,
 }: PageHeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-app-divider">
@@ -23,6 +27,7 @@ export default function PageHeader({
           <Link
             href={backHref}
             className="w-8 h-8 flex items-center justify-center rounded-full -ml-1 press-scale"
+            aria-label="Voltar"
           >
             <ArrowLeft size={20} className="text-tx-primary" />
           </Link>
@@ -39,10 +44,20 @@ export default function PageHeader({
           <Link
             href="/notificacoes"
             className="w-8 h-8 flex items-center justify-center rounded-full press-scale relative"
+            aria-label="Notificações"
           >
             <Bell size={20} className="text-tx-primary" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-accent-2 rounded-full" />
           </Link>
+        )}
+        {!hideMenu && (
+          <AppMenuDrawer
+            trigger={
+              <span className="w-8 h-8 flex items-center justify-center rounded-full">
+                <Menu size={20} className="text-tx-primary" />
+              </span>
+            }
+          />
         )}
       </div>
     </header>

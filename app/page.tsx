@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { IconBell, IconUserCircle } from '@tabler/icons-react'
+import { IconBell, IconMenu2 } from '@tabler/icons-react'
+import AppMenuDrawer from '@/src/components/AppMenuDrawer'
 import HomeTicker from '@/src/features/home/HomeTicker'
 import HomeHero from '@/src/features/home/HomeHero'
 import HomeShortcuts from '@/src/features/home/HomeShortcuts'
@@ -47,13 +48,13 @@ export default function HomePage() {
               <IconBell size={20} stroke={1.8} className="text-tx-primary" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-accent-2 rounded-full ring-2 ring-white" />
             </Link>
-            <Link
-              href="/perfil"
-              className="w-9 h-9 flex items-center justify-center rounded-full press-scale"
-              aria-label="Perfil"
-            >
-              <IconUserCircle size={22} stroke={1.6} className="text-tx-primary" />
-            </Link>
+            <AppMenuDrawer
+              trigger={
+                <span className="w-9 h-9 flex items-center justify-center rounded-full">
+                  <IconMenu2 size={22} stroke={1.8} className="text-tx-primary" />
+                </span>
+              }
+            />
           </div>
         </div>
       </header>
