@@ -4,22 +4,22 @@ import {
   IconMap2,
   IconShoppingBag,
   IconDeviceTv,
-  IconHeart,
+  IconRoute,
   IconBrain,
-  IconPaw,
+  IconCamera,
   IconGift,
 } from '@tabler/icons-react'
 import { CATEGORY_SHORTCUTS, type ShortcutIconName } from '@/src/lib/data/home'
 
 const ICON_MAP = {
-  calendar: IconCalendarEvent,
-  map:      IconMap2,
-  shopping: IconShoppingBag,
-  screen:   IconDeviceTv,
-  kiss:     IconHeart,
-  quiz:     IconBrain,
-  pet:      IconPaw,
-  gift:     IconGift,
+  calendar:  IconCalendarEvent,
+  map:       IconMap2,
+  shopping:  IconShoppingBag,
+  screen:    IconDeviceTv,
+  circuitos: IconRoute,
+  quiz:      IconBrain,
+  'foto-opp':IconCamera,
+  gift:      IconGift,
 } satisfies Record<ShortcutIconName, React.ComponentType<{ size?: number; stroke?: number; className?: string }>>
 
 export default function HomeShortcuts() {

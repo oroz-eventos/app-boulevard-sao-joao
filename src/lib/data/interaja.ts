@@ -1,54 +1,49 @@
 /**
- * Central de Interação — alinhado ao V8 oficial.
- * Tipos de interação reais mostrados nos mockups do app:
- * Kiss Cam, Super Quizzes, Envio pra telão (semanas temáticas),
- * Filtros (álbum de figurinhas), Jogos online, Curiosidades de SP,
- * Janelas para o Mundo.
+ * Central de Interação Boulevard São João.
+ *
+ * Alinhado ao Mídia Kit Comercial: Kiss Cam e Janela para o Mundo
+ * caíram do escopo. Modos atuais são focados em alimentar os 4
+ * editorias das telas LED, valorizar o patrimônio e conectar
+ * o paulistano com os comércios/circuitos do eixo.
  */
 
 export type InteracaoKind =
-  | 'kiss-cam'
-  | 'super-quiz'
-  | 'envio-tela'
-  | 'album-figurinhas'
-  | 'jogo-online'
-  | 'curiosidade-sp'
-  | 'janela-mundo'
+  | 'foto-opp'             // Foto-Opp Personagem Centro (instalação cênica)
+  | 'super-quiz'           // Super Quiz cultural
+  | 'envio-tela'           // Envio pra telão · semana temática
+  | 'album-figurinhas'     // Filtros AR · álbum do paulistano
+  | 'roteiro-guiado'       // Roteiros caminháveis (memória/foto/gastro)
+  | 'curiosidade-sp'       // Curiosidade do dia
+  | 'wishlist-endossa'     // Pop-Up Endossa · favoritos
 
 export type InteracaoSlide = {
   id: string
   kind: InteracaoKind
   title: string
   description: string
-  /** Texto curto pro chip de status (ex: "Ao vivo", "Termina em 3 dias") */
   statusLabel: string
-  /** Chip de público ativo (ex: "1.284 pessoas participando") */
   participantsLabel: string
-  /** Texto do CTA principal */
   actionLabel: string
-  /** Telão onde aparece (visível no detail) */
   telao?: string
   imageUri: string
-  /** Cor de destaque (pelo tipo) */
   accentColor: string
-  /** Pra detail: linha extra de regra/instrução */
   rule?: string
 }
 
 export const INTERACAO_SLIDES: InteracaoSlide[] = [
   {
-    id: 'kiss-cam',
-    kind: 'kiss-cam',
-    title: 'Kiss Cam Boulevard',
+    id: 'foto-opp-personagem-centro',
+    kind: 'foto-opp',
+    title: 'Foto-Opp · O Personagem Centro',
     description:
-      'A Kiss Cam está rodando agora no telão do Bar Brahma. Mostre seu carinho — o público escolhe os beijos que ficam em loop.',
-    statusLabel: 'AO VIVO',
-    participantsLabel: '4.180 pessoas assistindo agora',
-    actionLabel: 'Ativar Kiss Cam',
-    telao: 'Telão Bar Brahma',
-    imageUri: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#E91E8C',
-    rule: 'Conteúdo passa por moderação automática · só beijos passam.',
+      'A instalação imersiva no Espaço Cauby — casaco cinza, guarda-chuva de metal, neons e calçada paulista — espera seu retrato. Foto entra na rotação do telão Drogaria SP.',
+    statusLabel: 'Permanente · 24h',
+    participantsLabel: '8.402 retratos coletados',
+    actionLabel: 'Tirar minha foto',
+    telao: 'Telão Drogaria São Paulo',
+    imageUri: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
+    accentColor: '#5500CC',
+    rule: 'Sua foto passa por moderação automática · entra na fila em ~1h.',
   },
   {
     id: 'super-quiz-semana',
@@ -75,36 +70,50 @@ export const INTERACAO_SLIDES: InteracaoSlide[] = [
     actionLabel: 'Gravar vídeo',
     telao: 'Todos os 4 telões',
     imageUri: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#5500CC',
-    rule: 'Vídeos passam por curadoria · resposta em até 24h.',
+    accentColor: '#E91E8C',
+    rule: 'Vídeos passam por curadoria editorial · resposta em até 24h.',
+  },
+  {
+    id: 'roteiro-memoria',
+    kind: 'roteiro-guiado',
+    title: 'Roteiro de Memória do Centro',
+    description:
+      'Caminhada histórica com jovens guias capacitados resgatando histórias das ruas, fachadas e personagens. Duração 90min · gratuito.',
+    statusLabel: 'Próximo · sáb · 11h',
+    participantsLabel: '24 vagas · 18 confirmadas',
+    actionLabel: 'Reservar minha vaga',
+    telao: 'Ponto-Zero · São João × Ipiranga',
+    imageUri: 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1200&q=80',
+    accentColor: '#774DE8',
+    rule: 'Apadrinhamento dos jovens guias pela cota master cofundadora.',
   },
   {
     id: 'album-figurinhas',
     kind: 'album-figurinhas',
     title: 'Álbum de Figurinhas do Paulistano',
     description:
-      'Filtros divertidos transformam você em figurinha do álbum oficial do Boulevard. Cole sua cara e troque com a galera.',
+      'Filtros AR transformam você em figurinha do álbum oficial do Boulevard. Cole sua cara e troque com a galera. Conteúdo no telão Habibs.',
     statusLabel: 'Sempre disponível',
     participantsLabel: '18.402 figurinhas coladas',
     actionLabel: 'Tirar minha figurinha',
     telao: 'Telão Habibs (vitrine)',
     imageUri: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=1200&q=80',
     accentColor: '#F97316',
-    rule: 'Suas figurinhas aparecem aleatoriamente no telão Habibs.',
+    rule: 'Figurinhas aparecem aleatoriamente no telão Habibs.',
   },
   {
-    id: 'jogo-paulistano',
-    kind: 'jogo-online',
-    title: 'Jogo Boulevard · Multiplayer',
+    id: 'wishlist-endossa',
+    kind: 'wishlist-endossa',
+    title: 'Wishlist · Pop-Up Endossa',
     description:
-      'Quiz multiplayer com competição ao vivo. Cinco rodadas, perguntas sobre o Centro de SP, ranking projetado no telão central.',
-    statusLabel: 'Próxima rodada · sáb 20h',
-    participantsLabel: '312 jogadores inscritos',
-    actionLabel: 'Entrar na sala',
-    telao: 'Empena central',
-    imageUri: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#774DE8',
-    rule: 'Top 3 ganha cupom de R$50 nos bares parceiros.',
+      'Salve os achados das pop-ups de economia circular que rolam aos finais de semana. Cupons exclusivos via Vantagens pros itens salvos.',
+    statusLabel: 'Pop-up ativo · sáb e dom',
+    participantsLabel: '512 wishlists ativas',
+    actionLabel: 'Abrir wishlist',
+    telao: 'Pop-Ups Endossa · sáb/dom',
+    imageUri: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
+    accentColor: '#16A34A',
+    rule: 'Cupons gerados em parceria com marcas autorais convidadas.',
   },
   {
     id: 'curiosidade-sp',
@@ -118,23 +127,9 @@ export const INTERACAO_SLIDES: InteracaoSlide[] = [
     imageUri: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
     accentColor: '#16A34A',
   },
-  {
-    id: 'janela-ny',
-    kind: 'janela-mundo',
-    title: 'Janela para o Mundo · Nova York',
-    description:
-      'Telão central conectado em tempo real com a Times Square. Acene, cumprimente, dance — o pessoal de NY te vê.',
-    statusLabel: 'Ao vivo · 09:30 lá / 11:30 aqui',
-    participantsLabel: 'Conectado com 1 cidade agora',
-    actionLabel: 'Ver câmera ao vivo',
-    telao: 'Empena central',
-    imageUri: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1200&q=80',
-    accentColor: '#2A0066',
-    rule: 'Áudio liberado apenas durante os horários de cumprimento.',
-  },
 ]
 
-/** Compatibilidade com código antigo que esperava INTERAJA_SLIDES e KIND_LABELS */
+/** Compatibilidade com código antigo que esperava INTERAJA_SLIDES */
 export const INTERAJA_SLIDES = INTERACAO_SLIDES.map((s) => ({
   id: s.id,
   kind: s.kind,
@@ -147,11 +142,11 @@ export const INTERAJA_SLIDES = INTERACAO_SLIDES.map((s) => ({
 }))
 
 export const KIND_LABELS: Record<InteracaoKind, string> = {
-  'kiss-cam':         '💋 Kiss Cam',
+  'foto-opp':         '📸 Foto-Opp',
   'super-quiz':       '🧠 Super Quiz',
   'envio-tela':       '🎬 Envio pra telão',
-  'album-figurinhas': '✨ Álbum de figurinhas',
-  'jogo-online':      '🎮 Jogo Boulevard',
+  'album-figurinhas': '✨ Álbum',
+  'roteiro-guiado':   '🚶 Roteiro Guiado',
+  'wishlist-endossa': '🛍 Wishlist',
   'curiosidade-sp':   '📚 Curiosidade SP',
-  'janela-mundo':     '🌐 Janela para o Mundo',
 }

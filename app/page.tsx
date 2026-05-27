@@ -8,6 +8,8 @@ import HomeFeatured from '@/src/features/home/HomeFeatured'
 import HomePromo from '@/src/features/home/HomePromo'
 import HomeGrandesEventos from '@/src/features/home/HomeGrandesEventos'
 import HomeBoulevardAgora from '@/src/features/home/HomeBoulevardAgora'
+import HomeCircuitos from '@/src/features/home/HomeCircuitos'
+import HomeSustentacao from '@/src/features/home/HomeSustentacao'
 
 export default function HomePage() {
   return (
@@ -64,7 +66,7 @@ export default function HomePage() {
 
       {/* O Boulevard agora */}
       <section className="pt-5">
-        <div className="px-4 mb-3 flex items-center justify-between">
+        <div className="px-4 mb-3">
           <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
             O Boulevard agora
           </h2>
@@ -83,14 +85,34 @@ export default function HomePage() {
           <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
             Grandes eventos do ano
           </h2>
-          <Link
-            href="/eventos"
-            className="text-[12px] font-semibold text-brand press-scale"
-          >
+          <Link href="/eventos" className="text-[12px] font-semibold text-brand press-scale">
             Ver todos
           </Link>
         </div>
         <HomeGrandesEventos />
+      </section>
+
+      {/* 5 Circuitos integrados */}
+      <section className="pt-6">
+        <div className="px-4 mb-3 flex items-center justify-between">
+          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
+            5 circuitos integrados
+          </h2>
+          <Link href="/circuitos" className="text-[12px] font-semibold text-brand press-scale">
+            Ver todos
+          </Link>
+        </div>
+        <HomeCircuitos />
+      </section>
+
+      {/* Sustentação P/M/G — todo fim de semana */}
+      <section className="pt-6">
+        <div className="px-4 mb-3">
+          <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
+            Todo fim de semana
+          </h2>
+        </div>
+        <HomeSustentacao />
       </section>
 
       {/* Central de Interação · promo */}

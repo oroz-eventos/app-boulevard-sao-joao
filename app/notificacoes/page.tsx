@@ -2,10 +2,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import {
-  IconHeart,
+  IconCamera,
   IconBrain,
   IconDeviceTv,
-  IconWorld,
+  IconWalk,
   IconCalendarEvent,
   IconMusic,
   IconGift,
@@ -16,6 +16,7 @@ import {
   IconInfoCircle,
   IconMap2,
   IconPalette,
+  IconChristmasTree,
 } from '@tabler/icons-react'
 import {
   NOTIFICATION_ITEMS,
@@ -26,21 +27,22 @@ import {
 } from '@/src/lib/data/notificacoes'
 import PageHeader from '@/src/components/PageHeader'
 
-const ICON_MAP: Record<NotificationKind, typeof IconHeart> = {
-  'kiss-cam':     IconHeart,
-  'quiz':         IconBrain,
-  'envio-tela':   IconDeviceTv,
-  'janela-mundo': IconWorld,
-  'evento':       IconCalendarEvent,
-  'palco':        IconMusic,
-  'vantagem':     IconGift,
-  'solidario':    IconHandStop,
-  'lugar':        IconBuildingMonument,
-  'feira':        IconShoppingBag,
-  'pet':          IconPaw,
-  'aviso':        IconInfoCircle,
-  'mapa':         IconMap2,
-  'arte-tela':    IconPalette,
+const ICON_MAP: Record<NotificationKind, typeof IconCamera> = {
+  'foto-opp':   IconCamera,
+  'quiz':       IconBrain,
+  'envio-tela': IconDeviceTv,
+  'roteiro':    IconWalk,
+  'evento':     IconCalendarEvent,
+  'palco':      IconMusic,
+  'vantagem':   IconGift,
+  'solidario':  IconHandStop,
+  'lugar':      IconBuildingMonument,
+  'feira':      IconShoppingBag,
+  'pet':        IconPaw,
+  'aviso':      IconInfoCircle,
+  'mapa':       IconMap2,
+  'arte-tela':  IconPalette,
+  'natal':      IconChristmasTree,
 }
 
 export default function NotificacoesPage() {

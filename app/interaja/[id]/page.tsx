@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Users, Clock, Camera, MapPin, Info, AlertCircle } from 'lucide-react'
+import { Users, Camera, MapPin, Info, AlertCircle } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 import { INTERACAO_SLIDES, KIND_LABELS, type InteracaoSlide } from '@/src/lib/data/interaja'
 
@@ -29,10 +29,7 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-          {slide.statusLabel === 'AO VIVO' && (
-            <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
-          )}
+        <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
           {slide.statusLabel}
         </div>
         <div className="absolute bottom-3 left-4 right-4">
@@ -59,7 +56,7 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
             <div className="bg-app-surface rounded-xl p-3">
               <div className="flex items-center gap-1.5 text-tx-tertiary">
                 <MapPin size={12} />
-                <span className="text-[10px] font-semibold uppercase tracking-wide">Telão</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wide">Onde aparece</span>
               </div>
               <p className="text-[12px] font-semibold text-tx-primary mt-1 leading-snug">
                 {slide.telao}
@@ -68,7 +65,6 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
           )}
         </div>
 
-        {/* Regras */}
         {slide.rule && (
           <div className="mt-3 bg-brand-light rounded-xl p-3 flex gap-2">
             <Info size={14} className="text-brand shrink-0 mt-0.5" />
@@ -76,12 +72,10 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
           </div>
         )}
 
-        {/* Mockup específico por tipo */}
         <div className="mt-5">
           {renderModeMock(slide)}
         </div>
 
-        {/* CTA principal */}
         <button
           className="w-full mt-5 rounded-xl font-bold py-4 text-white press-scale flex items-center justify-center gap-2"
           style={{ backgroundColor: slide.accentColor }}
@@ -90,7 +84,6 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
           {slide.actionLabel}
         </button>
 
-        {/* Cadastro */}
         <div className="mt-3 bg-app-surface rounded-xl p-3 flex gap-2 items-start">
           <AlertCircle size={14} className="text-tx-tertiary shrink-0 mt-0.5" />
           <p className="text-[11px] text-tx-tertiary leading-snug">
@@ -105,25 +98,16 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
   )
 }
 
-/** Mockup específico que ilustra o tipo de interação */
 function renderModeMock(slide: InteracaoSlide) {
   switch (slide.kind) {
-    case 'super-quiz':
-      return <QuizMock slide={slide} />
-    case 'kiss-cam':
-      return <KissCamMock slide={slide} />
-    case 'envio-tela':
-      return <EnvioMock slide={slide} />
-    case 'jogo-online':
-      return <JogoMock slide={slide} />
-    case 'album-figurinhas':
-      return <AlbumMock slide={slide} />
-    case 'curiosidade-sp':
-      return <CuriosidadeMock slide={slide} />
-    case 'janela-mundo':
-      return <JanelaMock slide={slide} />
-    default:
-      return null
+    case 'super-quiz':       return <QuizMock slide={slide} />
+    case 'foto-opp':         return <FotoOppMock slide={slide} />
+    case 'envio-tela':       return <EnvioMock slide={slide} />
+    case 'roteiro-guiado':   return <RoteiroMock slide={slide} />
+    case 'album-figurinhas': return <AlbumMock slide={slide} />
+    case 'wishlist-endossa': return <WishlistMock slide={slide} />
+    case 'curiosidade-sp':   return <CuriosidadeMock slide={slide} />
+    default:                 return null
   }
 }
 
@@ -133,37 +117,38 @@ function QuizMock({ slide }: { slide: InteracaoSlide }) {
     <div className="bg-white border border-app-divider rounded-2xl p-4">
       <p className="text-[10px] font-bold uppercase tracking-wide text-tx-tertiary">Pergunta da semana</p>
       <p className="text-[14px] font-bold text-tx-primary mt-1">
-        Qual famosa avenida de São Paulo já teve o nome de “Avenida da Esperança”?
+        Qual famosa avenida de São Paulo já teve o nome de "Avenida da Esperança"?
       </p>
       <div className="mt-3 space-y-2">
         {options.map((o, i) => (
-          <div
-            key={o}
-            className="border border-app-divider rounded-xl px-3 py-2.5 flex items-center justify-between"
-          >
+          <div key={o} className="border border-app-divider rounded-xl px-3 py-2.5 flex items-center justify-between">
             <span className="text-[13px] text-tx-primary">{o}</span>
             <span className="text-[10px] text-tx-tertiary">{[42, 29, 29][i]}%</span>
           </div>
         ))}
       </div>
-      <p className="text-[10px] text-tx-tertiary mt-3" style={{ color: slide.accentColor }}>
+      <p className="text-[10px] mt-3" style={{ color: slide.accentColor }}>
         Ranking atualiza no telão a cada 10 min.
       </p>
     </div>
   )
 }
 
-function KissCamMock({ slide }: { slide: InteracaoSlide }) {
+function FotoOppMock({ slide }: { slide: InteracaoSlide }) {
   return (
-    <div className="bg-black rounded-2xl overflow-hidden aspect-video relative">
-      <Image src={slide.imageUri} alt="Kiss Cam preview" fill className="object-cover opacity-90" sizes="430px" />
-      <div className="absolute inset-0 ring-2 ring-pink-500 ring-inset rounded-2xl" />
-      <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
-        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-        AO VIVO · BAR BRAHMA
+    <div className="relative rounded-2xl overflow-hidden aspect-[3/4]">
+      <Image src={slide.imageUri} alt="Personagem Centro" fill className="object-cover" sizes="430px" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30" />
+      <div className="absolute top-3 left-3 bg-white/15 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+        📸 INSTALAÇÃO PERMANENTE
       </div>
-      <div className="absolute bottom-3 left-3 right-3 bg-black/40 backdrop-blur-md text-white text-[11px] font-medium px-3 py-2 rounded-lg">
-        Aponte a câmera pro telão · sua imagem entra em loop em 3s
+      <div className="absolute bottom-3 left-3 right-3 text-white">
+        <p className="text-[11px] font-semibold opacity-80 uppercase tracking-wide">
+          Espaço Cauby Peixoto
+        </p>
+        <p className="font-bold text-[14px] mt-1 leading-tight">
+          Casaco cinza · guarda-chuva de metal · neons · calçada paulista
+        </p>
       </div>
     </div>
   )
@@ -191,27 +176,35 @@ function EnvioMock({ slide }: { slide: InteracaoSlide }) {
   )
 }
 
-function JogoMock({ slide }: { slide: InteracaoSlide }) {
+function RoteiroMock({ slide }: { slide: InteracaoSlide }) {
   return (
     <div className="bg-white border border-app-divider rounded-2xl p-4">
       <div className="flex items-center justify-between">
-        <span className="text-[10px] font-bold uppercase tracking-wide text-tx-tertiary">Próxima rodada</span>
-        <span className="text-[12px] font-bold" style={{ color: slide.accentColor }}>Sáb · 20h</span>
+        <span className="text-[10px] font-bold uppercase tracking-wide text-tx-tertiary">Próxima saída</span>
+        <span className="text-[12px] font-bold" style={{ color: slide.accentColor }}>Sáb · 11h</span>
       </div>
-      <div className="mt-3 flex items-center justify-between">
-        <div>
-          <p className="text-[12px] text-tx-tertiary">Inscritos</p>
-          <p className="text-[22px] font-black text-tx-primary leading-none">312</p>
-        </div>
-        <div>
-          <p className="text-[12px] text-tx-tertiary">Rodadas</p>
-          <p className="text-[22px] font-black text-tx-primary leading-none">5</p>
-        </div>
-        <div>
-          <p className="text-[12px] text-tx-tertiary">Prêmio top 3</p>
-          <p className="text-[22px] font-black text-tx-primary leading-none">R$ 50</p>
-        </div>
+      <div className="mt-3 space-y-1.5">
+        {[
+          'Ponto-Zero · São João × Ipiranga',
+          'Igreja N. Sra. do Rosário dos Homens Pretos',
+          'Estátua da Mãe Preta',
+          'Relógio de Nichile',
+          'Espaço Cauby Peixoto · arquibancada',
+        ].map((p, i) => (
+          <div key={p} className="flex items-center gap-2 text-tx-secondary">
+            <span
+              className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+              style={{ backgroundColor: slide.accentColor }}
+            >
+              {i + 1}
+            </span>
+            <span className="text-[12px]">{p}</span>
+          </div>
+        ))}
       </div>
+      <p className="text-[10px] mt-3" style={{ color: slide.accentColor }}>
+        Duração ~90min · jovens guias capacitados.
+      </p>
     </div>
   )
 }
@@ -237,6 +230,36 @@ function AlbumMock({ slide }: { slide: InteracaoSlide }) {
   )
 }
 
+function WishlistMock({ slide }: { slide: InteracaoSlide }) {
+  const itens = [
+    { label: 'Camiseta upcycle · Tribus', valor: 'R$ 89' },
+    { label: 'Capa de tablet em couro reciclado', valor: 'R$ 145' },
+    { label: 'Kit zero-waste cozinha', valor: 'R$ 76' },
+  ]
+  return (
+    <div className="bg-white border border-app-divider rounded-2xl p-4">
+      <p className="text-[10px] font-bold uppercase tracking-wide text-tx-tertiary">Salvos pra esse fim de semana</p>
+      <div className="mt-3 space-y-2">
+        {itens.map((i) => (
+          <div key={i.label} className="flex items-center gap-3">
+            <div
+              className="w-9 h-9 rounded-lg shrink-0"
+              style={{ backgroundColor: slide.accentColor + '20' }}
+            />
+            <div className="flex-1 min-w-0">
+              <p className="text-[12px] font-semibold text-tx-primary leading-tight">{i.label}</p>
+              <p className="text-[11px] text-tx-tertiary">{i.valor}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p className="text-[11px] mt-3" style={{ color: slide.accentColor }}>
+        Cupons no Vantagens pros itens salvos.
+      </p>
+    </div>
+  )
+}
+
 function CuriosidadeMock({ slide }: { slide: InteracaoSlide }) {
   return (
     <div className="bg-white border border-app-divider rounded-2xl p-4">
@@ -248,20 +271,6 @@ function CuriosidadeMock({ slide }: { slide: InteracaoSlide }) {
       <p className="text-[11px] mt-3" style={{ color: slide.accentColor }}>
         Próxima curiosidade amanhã às 10h.
       </p>
-    </div>
-  )
-}
-
-function JanelaMock({ slide }: { slide: InteracaoSlide }) {
-  return (
-    <div className="bg-black rounded-2xl overflow-hidden aspect-video relative">
-      <Image src={slide.imageUri} alt="Times Square" fill className="object-cover opacity-90" sizes="430px" />
-      <div className="absolute top-3 left-3 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-        🗽 NEW YORK · TIMES SQUARE
-      </div>
-      <div className="absolute bottom-3 left-3 right-3 bg-black/40 backdrop-blur-md text-white text-[11px] font-medium px-3 py-2 rounded-lg">
-        Acene · o pessoal de NY te vê no telão da Times Square.
-      </div>
     </div>
   )
 }

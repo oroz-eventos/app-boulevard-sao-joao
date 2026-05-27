@@ -14,7 +14,7 @@ export type MapKind =
   | 'pets'         // parcão + feira de adoção
   | 'monumentos'   // restauro: igreja, estátua, relógio
   | 'utility'      // ponto-zero, totem de carga, wifi
-  | 'esportes'     // Vertical Sports (escalada nas empenas)
+  | 'sustentacao'  // Foto-Opp, Pista Gelo, Pop-Ups Endossa
   | 'comercio'     // lojas/restaurantes parceiros
 
 export type MapMarker = {
@@ -42,12 +42,12 @@ export const MAP_FILTERS: { id: 'todos' | MapKind; label: string }[] = [
   { id: 'todos',       label: 'Tudo' },
   { id: 'telas',       label: 'Telões' },
   { id: 'palcos',      label: 'Palcos' },
+  { id: 'sustentacao', label: 'Sustentação' },
   { id: 'gastronomia', label: 'Gastronomia' },
   { id: 'artistas',    label: 'Artistas' },
   { id: 'pets',        label: 'Pets' },
   { id: 'monumentos',  label: 'Monumentos' },
   { id: 'utility',     label: 'Utilidade' },
-  { id: 'esportes',    label: 'Esportes' },
 ]
 
 export const KIND_COLORS: Record<MapKind, string> = {
@@ -58,7 +58,7 @@ export const KIND_COLORS: Record<MapKind, string> = {
   pets:        '#E91E8C',
   monumentos:  '#774DE8',
   utility:     '#525252',
-  esportes:    '#E91E8C',
+  sustentacao: '#774DE8',
   comercio:    '#F97316',
 }
 
@@ -70,7 +70,7 @@ export const KIND_LABEL: Record<MapKind, string> = {
   pets:        'Pet',
   monumentos:  'Monumento',
   utility:     'Utilidade',
-  esportes:    'Esportes',
+  sustentacao: 'Sustentação',
   comercio:    'Comércio',
 }
 
@@ -284,15 +284,46 @@ export const MAP_MARKERS: MapMarker[] = [
     hours: 'Sáb e Dom · 16h–22h',
   },
 
-  // === ESPORTES ===
+  // === SUSTENTAÇÃO · NÍVEL G E ÍCONES VISUAIS DO FDS ===
   {
-    id: 'vertical-sports',
-    kind: 'esportes',
-    title: 'Vertical Sports · Empena escalável',
-    subtitle: 'Escalada esportiva em parede de 14m · com monitor',
-    x: 36, y: 26,
-    color: KIND_COLORS.esportes,
-    hours: 'Sáb e Dom · 14h–20h',
-    imageUri: 'https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1200&q=80',
+    id: 'foto-opp-personagem-centro',
+    kind: 'sustentacao',
+    title: 'Foto-Opp · O Personagem Centro',
+    subtitle: 'Instalação imersiva permanente · casaco cinza, neons, calçada paulista',
+    x: 86, y: 16,
+    color: KIND_COLORS.sustentacao,
+    hours: 'Permanente · 24h',
+    detailHref: '/interaja/foto-opp-personagem-centro',
+    imageUri: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'pista-gelo',
+    kind: 'sustentacao',
+    title: 'Pista "Gelo do Centro"',
+    subtitle: 'Patinação familiar nas praças do calçadão',
+    x: 34, y: 60,
+    color: KIND_COLORS.sustentacao,
+    hours: 'Sáb e Dom · 14h–22h (sazonal)',
+    imageUri: 'https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'pop-up-endossa',
+    kind: 'sustentacao',
+    title: 'Pop-Ups Endossa · Economia Circular',
+    subtitle: 'Contêineres modulares · moda circular e marcas autorais',
+    x: 60, y: 30,
+    color: KIND_COLORS.sustentacao,
+    hours: 'Sáb e Dom · 12h–20h',
+    imageUri: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80',
+  },
+  {
+    id: 'estudio-vidro',
+    kind: 'sustentacao',
+    title: 'Estúdio de Vidro · Streaming ao vivo',
+    subtitle: 'Cabine de transmissão pra editorial Conteúdo ao Vivo',
+    x: 42, y: 18,
+    color: KIND_COLORS.sustentacao,
+    hours: 'Operação durante eventos',
+    imageUri: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=80',
   },
 ]

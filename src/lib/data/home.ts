@@ -9,31 +9,31 @@ import { GRANDES_EVENTOS, eventoDoMes } from './eventos'
 
 export const LIVE_TICKER_ITEMS = [
   'Palco 2 às 19h · Roda de samba paulistana',
-  'Kiss Cam ativa agora · aponte sua câmera no telão Brahma',
-  'Feira dominical no eixo · 80 estandes abertos até 18h',
-  'Vertical Sports na empena · escalada com monitor às 16h',
-  'Super Quiz da semana liberado no app · prêmio do Bar Brahma',
-  'Janela para o Mundo · ao vivo agora com Times Square',
-  'Semana das Embaixadinhas · envie seu vídeo pra aparecer',
+  'Foto-Opp Personagem Centro liberada · veja sua foto no telão Drogaria SP',
+  'Feira Gastronômica & Roda de Samba · sáb 18h–23h',
+  'Pista Gelo do Centro aberta nas praças · sáb e dom 14h–22h',
+  'Super Quiz da semana liberado · prêmio do Bar Brahma',
+  'Pop-Ups Endossa · economia circular no calçadão',
+  'Semana das Embaixadinhas · envie seu vídeo pra aparecer no telão',
   'Parcão abriu · feira de adoção com 12 cães',
-  'Cinema ao ar livre no Espaço Cauby às 20h',
-  'Telão Drogaria SP com mostra de Arte na Tela · grafiteiras paulistanas',
+  'Cinema ao Ar Livre no Espaço Cauby às 20h',
+  'Telão Drogaria SP com mostra "SP em Stencil" · 12 grafiteiras paulistanas',
   'Palco Rua às 21h · batalha de MC convida MCs do Centro',
-  'Cortejo afro sai do Paissandu às 17h',
+  'Cortejo afro sai do Paissandu às 17h · Boulevard Black',
   'Bar Brahma com choro ao vivo · happy hour até 19h',
+  'Roteiro de Memória sai do Ponto-Zero · sáb 11h · com jovens guias',
   'Editorial Acontece no Centro · novo café da Marechal abre amanhã',
-  'Conteúdo ao Vivo · transmissão do Oscars no telão central',
-  'Bondinho Natalino circulando · embarque no Largo do Paissandu',
+  'Bondinho Natalino circulando · 20min de viagem emocional',
   'Quiz da Avenida da Esperança no app · 1.243 jogando agora',
   'Acendimento sincronizado dos 4 telões às 18h',
-  'Filtro AR da semana · álbum de figurinhas do paulistano',
-  'Show internacional anunciado pro Boulevard Festival · 09/26',
+  'Cantata das Sacadas hoje · clássicos do Cauby na Praça',
+  'Show de drones no Réveillon · contagem regressiva nas fachadas',
 ]
 
 /** Atalhos da home — todos os 8 levam pra rotas reais do app */
 export type ShortcutIconName =
   | 'calendar' | 'map' | 'shopping' | 'screen'
-  | 'kiss' | 'quiz' | 'pet' | 'gift'
+  | 'circuitos' | 'quiz' | 'foto-opp' | 'gift'
 
 export const CATEGORY_SHORTCUTS: {
   id: string
@@ -41,14 +41,14 @@ export const CATEGORY_SHORTCUTS: {
   icon: ShortcutIconName
   href: string
 }[] = [
-  { id: 'prog',      label: 'Programação', icon: 'calendar', href: '/programacao' },
-  { id: 'mapa',      label: 'Mapa',        icon: 'map',      href: '/mapa' },
-  { id: 'feira',     label: 'Feira',       icon: 'shopping', href: '/feira' },
-  { id: 'telas',     label: 'Telões',      icon: 'screen',   href: '/feed' },
-  { id: 'kiss',      label: 'Kiss Cam',    icon: 'kiss',     href: '/interaja' },
-  { id: 'quiz',      label: 'Quizzes',     icon: 'quiz',     href: '/interaja' },
-  { id: 'pet',       label: 'Pet',         icon: 'pet',      href: '/mapa' },
-  { id: 'vantagens', label: 'Vantagens',   icon: 'gift',     href: '/vantagens' },
+  { id: 'prog',      label: 'Programação', icon: 'calendar',  href: '/programacao' },
+  { id: 'mapa',      label: 'Mapa',        icon: 'map',       href: '/mapa' },
+  { id: 'circuitos', label: 'Circuitos',   icon: 'circuitos', href: '/circuitos' },
+  { id: 'telas',     label: 'Telões',      icon: 'screen',    href: '/feed' },
+  { id: 'feira',     label: 'Feira',       icon: 'shopping',  href: '/feira' },
+  { id: 'foto-opp',  label: 'Foto-Opp',    icon: 'foto-opp',  href: '/interaja/foto-opp-personagem-centro' },
+  { id: 'quiz',      label: 'Quizzes',     icon: 'quiz',      href: '/interaja' },
+  { id: 'vantagens', label: 'Vantagens',   icon: 'gift',      href: '/vantagens' },
 ]
 
 /** Hero rotativa — evento do mês ativo + abertura sábado */
@@ -107,15 +107,15 @@ export const FEATURED = evento
       href: '/programacao',
     }
 
-/** Promo carousel — utilidade pública + central de interação */
+/** Promo carousel — Central de Interação alinhada ao mídia kit */
 export const PROMO_SLIDES = [
   {
-    id: 'promo-kiss',
-    title: 'Kiss Cam Boulevard',
-    subtitle: 'Mostre seu carinho · seu beijo pode aparecer no telão Brahma.',
-    cta: 'Abrir Kiss Cam',
-    backgroundColor: '#E91E8C',
-    href: '/interaja',
+    id: 'promo-foto-opp',
+    title: 'Foto-Opp · Personagem Centro',
+    subtitle: 'Casaco cinza, guarda-chuva de metal, neons. Sua foto vai pro telão Drogaria SP.',
+    cta: 'Tirar foto',
+    backgroundColor: '#5500CC',
+    href: '/interaja/foto-opp-personagem-centro',
   },
   {
     id: 'promo-quiz',
@@ -123,23 +123,23 @@ export const PROMO_SLIDES = [
     subtitle: 'Responda em tempo real e suba no ranking dos paulistanos.',
     cta: 'Jogar agora',
     backgroundColor: '#3B5BDB',
-    href: '/interaja',
+    href: '/interaja/super-quiz-semana',
   },
   {
     id: 'promo-telao',
     title: 'Envie pra tela',
     subtitle: 'Semana das Embaixadinhas · grava 15s e aparece no telão.',
     cta: 'Participar',
-    backgroundColor: '#5500CC',
-    href: '/interaja',
+    backgroundColor: '#E91E8C',
+    href: '/interaja/envio-embaixadinhas',
   },
   {
-    id: 'promo-janelas',
-    title: 'Janelas para o Mundo',
-    subtitle: 'Telões síncronos com Nova York e Tóquio · ao vivo agora.',
-    cta: 'Ver ao vivo',
-    backgroundColor: '#2A0066',
-    href: '/interaja',
+    id: 'promo-roteiro',
+    title: 'Roteiro de Memória',
+    subtitle: 'Caminhada de 90min com jovens guias capacitados pelo Centro.',
+    cta: 'Reservar vaga',
+    backgroundColor: '#774DE8',
+    href: '/interaja/roteiro-memoria',
   },
 ]
 
