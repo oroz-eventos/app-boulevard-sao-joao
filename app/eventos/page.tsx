@@ -1,20 +1,57 @@
+'use client'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Sparkles, Calendar } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 import { GRANDES_EVENTOS, eventoDoMes } from '@/src/lib/data/eventos'
 
+type Filter = 'todos' | 'ancora' | 'mes-atual'
+
 export default function EventosListPage() {
+  const [filter, setFilter] = useState<Filter>('todos')
   const ativo = eventoDoMes()
+
+  const filtered = useMemo(() => {
+    if (filter === 'ancora') return GRANDES_EVENTOS.filter((e) => e.isDataAncora)
+    if (filter === 'mes-atual') return ativo ? [ativo] : []
+    return GRANDES_EVENTOS
+  }, [filter, ativo])
 
   return (
     <div className="animate-fade-in">
-      <PageHeader title="Grandes Eventos" subtitle="12 macroeventos no calendário do Boulevard" showBack />
+      <PageHeader
+        title="Grandes Eventos"
+        subtitle="12 macroeventos no calendário"
+        showBack
+      />
 
-      {/* Destaque · evento do mês ativo */}
-      {ativo && (
+      {/* Filter chips */}
+      <div className="flex gap-2 overflow-x-auto scrollbar-hide px-4 py-3">
+        {[
+          { id: 'todos' as Filter,     label: 'Todos · 12' },
+          { id: 'mes-atual' as Filter, label: `Este mês${ativo ? ` · ${ativo.monthLabel}` : ''}` },
+          { id: 'ancora' as Filter,    label: 'Datas-âncora · 3' },
+        ].map((f) => (
+          <button
+            key={f.id}
+            onClick={() => setFilter(f.id)}
+            className={`shrink-0 px-4 py-1.5 rounded-full text-[12px] font-semibold border transition-all press-scale ${
+              filter === f.id
+                ? 'bg-brand text-white border-brand'
+                : 'bg-white text-tx-secondary border-app-divider'
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Destaque · evento do mês ativo (só se filtro=todos) */}
+      {filter === 'todos' && ativo && (
         <Link
           href={`/eventos/${ativo.slug}`}
-          className="block mx-4 mt-4 rounded-2xl overflow-hidden press-scale relative h-44"
+          className="block mx-4 mt-2 rounded-2xl overflow-hidden press-scale relative h-44"
         >
           <Image
             src={ativo.imageUri}
@@ -36,13 +73,25 @@ export default function EventosListPage() {
         </Link>
       )}
 
-      {/* Grid de 12 eventos */}
+      {/* Empty state */}
+      {filtered.length === 0 && (
+        <div className="px-4 py-12 text-center">
+          <div className="w-12 h-12 mx-auto rounded-full bg-app-surface flex items-center justify-center mb-3">
+            <Calendar size={20} className="text-tx-tertiary" />
+          </div>
+          <p className="text-[14px] font-semibold text-tx-primary">Nada nesse filtro</p>
+        </div>
+      )}
+
+      {/* Grid */}
       <section className="mt-6 px-4 pb-4">
-        <h3 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
-          Calendário do ano
-        </h3>
+        {filter === 'todos' && (
+          <h3 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
+            Calendário do ano
+          </h3>
+        )}
         <div className="grid grid-cols-2 gap-3">
-          {GRANDES_EVENTOS.map((e) => (
+          {filtered.map((e) => (
             <Link
               key={e.slug}
               href={`/eventos/${e.slug}`}
@@ -62,6 +111,12 @@ export default function EventosListPage() {
                 >
                   {e.monthLabel}
                 </div>
+                {e.isDataAncora && (
+                  <div className="absolute top-2 right-2 bg-white text-tx-primary text-[9px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                    <Sparkles size={9} />
+                    Âncora
+                  </div>
+                )}
               </div>
               <div className="p-3">
                 <h4 className="font-bold text-[13px] text-tx-primary leading-tight">{e.title}</h4>

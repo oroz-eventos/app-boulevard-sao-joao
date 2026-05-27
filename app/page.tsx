@@ -10,6 +10,7 @@ import HomeGrandesEventos from '@/src/features/home/HomeGrandesEventos'
 import HomeBoulevardAgora from '@/src/features/home/HomeBoulevardAgora'
 import HomeCircuitos from '@/src/features/home/HomeCircuitos'
 import HomeSustentacao from '@/src/features/home/HomeSustentacao'
+import BoulevardStatus from '@/src/features/home/BoulevardStatus'
 
 export default function HomePage() {
   return (
@@ -17,7 +18,7 @@ export default function HomePage() {
       {/* Header com logo */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-app-divider">
         <div className="flex items-center justify-between h-14 px-4">
-          <Link href="/" className="flex items-center gap-2 press-scale">
+          <Link href="/" className="flex items-center gap-2 press-scale min-w-0">
             <Image
               src="/logo-mark.png"
               alt="Boulevard São João"
@@ -34,6 +35,9 @@ export default function HomePage() {
               </p>
             </div>
           </Link>
+          <div className="flex-1 flex justify-center">
+            <BoulevardStatus />
+          </div>
           <div className="flex items-center gap-1">
             <Link
               href="/notificacoes"
