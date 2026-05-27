@@ -1,23 +1,26 @@
 /**
- * Sustentação do Boulevard São João (Mídia Kit Comercial).
- * "A vida no calçadão acontece todos os sábados e domingos."
+ * Atividades regulares do Boulevard São João.
+ * Operam em paralelo aos Grandes Eventos mensais e datas-âncora.
  *
- * Três níveis de intensidade que operam em paralelo aos
- * Grandes Eventos mensais e às 3 datas-âncora:
+ * Agrupamento amigável pro usuário do app (3 grupos):
+ *  - "sempre-aberto"     — instalações e serviços que ficam sempre disponíveis
+ *  - "aulas-roteiros"    — workshops, escolas e caminhadas guiadas
+ *  - "fds-ancora"        — atrações ícone que rolam todo sáb/dom
  *
- *  - NÍVEL P (Permanente)        — 6 ativações silenciosas de
- *                                   utilidade pública
- *  - NÍVEL M (Média intensidade) — 6 ativações editoriais &
- *                                   caminháveis (formação)
- *  - NÍVEL G (Grande intensidade) — 4 ativações âncora de
- *                                    fim de semana (sáb/dom)
+ * (Internamente cada item carrega um campo `nivel` P/M/G que é
+ * jargão comercial pra venda de cota — não exibimos no app.)
  */
 
 export type NivelSustentacao = 'P' | 'M' | 'G'
 
+export type GrupoAtividade = 'sempre-aberto' | 'aulas-roteiros' | 'fds-ancora'
+
 export type AtivacaoSustentacao = {
   id: string
+  /** Uso interno comercial — não exibir */
   nivel: NivelSustentacao
+  /** Agrupamento visual pro usuário final */
+  grupo: GrupoAtividade
   title: string
   subtitle: string
   description: string
@@ -38,20 +41,20 @@ export type AtivacaoSustentacao = {
   circuitoSlug?: string
 }
 
-export const NIVEL_LABEL: Record<NivelSustentacao, { titulo: string; subtitulo: string; cor: string }> = {
-  P: {
-    titulo: 'Permanente',
-    subtitulo: 'Infraestrutura silenciosa de utilidade e lazer',
+export const GRUPO_LABEL: Record<GrupoAtividade, { titulo: string; subtitulo: string; cor: string }> = {
+  'sempre-aberto': {
+    titulo: 'Sempre por aqui',
+    subtitulo: 'Instalações abertas ao público durante toda a semana',
     cor: '#5500CC',
   },
-  M: {
-    titulo: 'Média intensidade',
-    subtitulo: 'Trilha editorial, formação e caminhada',
+  'aulas-roteiros': {
+    titulo: 'Aulas e roteiros',
+    subtitulo: 'Workshops e caminhadas guiadas com curadoria local',
     cor: '#3B5BDB',
   },
-  G: {
-    titulo: 'Grande intensidade',
-    subtitulo: 'Ícones visuais de fim de semana · sáb e dom',
+  'fds-ancora': {
+    titulo: 'Todo fim de semana',
+    subtitulo: 'Atrações fixas que rolam todo sábado e domingo',
     cor: '#E91E8C',
   },
 }
@@ -61,6 +64,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-ponto-zero',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Ponto-Zero · SJ × Ipiranga',
     subtitle: 'Esquina São João & Ipiranga',
     description:
@@ -71,6 +75,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-totens-carga',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Totens de utilidade pública',
     subtitle: 'Rede de 6 a 8 totens de carregamento rápido',
     description:
@@ -81,6 +86,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-foto-opp-personagem-centro',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Foto-Opp · O Personagem Centro',
     subtitle: 'Instalação imersiva assinada por artista paulistano',
     description:
@@ -91,6 +97,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-estacao-saude',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Estação de Saúde & Bem-Estar',
     subtitle: 'Posto físico gratuito',
     description:
@@ -101,6 +108,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-parcao',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Parcão Boulevard · Pet & Agility',
     subtitle: 'Parque urbano permanente',
     description:
@@ -112,6 +120,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'p-galeria-fotografica',
     nivel: 'P',
+    grupo: 'sempre-aberto',
     title: 'Galeria Fotográfica Urbana',
     subtitle: 'Exposições no calçadão',
     description:
@@ -125,6 +134,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-escola-gastronomia',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Escola de Gastronomia',
     subtitle: 'Módulos práticos com chefs locais',
     description:
@@ -136,6 +146,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-arte-urbana',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Escola de Arte Urbana',
     subtitle: 'Oficinas gratuitas',
     description:
@@ -147,6 +158,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-escola-restauro',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Escola de Restauro',
     subtitle: 'Workshops práticos de preservação',
     description:
@@ -158,6 +170,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-roteiros-fotograficos',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Roteiros Fotográficos',
     subtitle: 'Caminhadas temáticas',
     description:
@@ -169,6 +182,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-roteiros-memoria',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Roteiros de Memória',
     subtitle: 'Caminhadas históricas',
     description:
@@ -180,6 +194,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'm-roteiros-gastronomicos',
     nivel: 'M',
+    grupo: 'aulas-roteiros',
     title: 'Roteiros Gastronômicos',
     subtitle: 'Circuitos de menus promocionais',
     description:
@@ -193,6 +208,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'g-feira-gastronomica',
     nivel: 'G',
+    grupo: 'fds-ancora',
     title: 'Feira Gastronômica & Roda de Samba',
     subtitle: 'Nominada pela cofundadora master',
     description:
@@ -204,6 +220,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'g-gelo-do-centro',
     nivel: 'G',
+    grupo: 'fds-ancora',
     title: 'Pista "Gelo do Centro"',
     subtitle: 'Patinação familiar',
     description:
@@ -214,6 +231,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'g-pop-up-endossa',
     nivel: 'G',
+    grupo: 'fds-ancora',
     title: 'Pop-Ups de Economia Circular',
     subtitle: 'Endossa + Tribus',
     description:
@@ -224,6 +242,7 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
   {
     id: 'g-ativacao-animal',
     nivel: 'G',
+    grupo: 'fds-ancora',
     title: 'Ativação Animal',
     subtitle: 'Parcão · adoção e adestramento',
     description:
@@ -236,4 +255,8 @@ export const ATIVACOES_SUSTENTACAO: AtivacaoSustentacao[] = [
 
 export function ativacoesPorNivel(nivel: NivelSustentacao) {
   return ATIVACOES_SUSTENTACAO.filter((a) => a.nivel === nivel)
+}
+
+export function ativacoesPorGrupo(grupo: GrupoAtividade) {
+  return ATIVACOES_SUSTENTACAO.filter((a) => a.grupo === grupo)
 }

@@ -105,11 +105,11 @@ export default function HomePage() {
         <HomeCircuitos />
       </section>
 
-      {/* Sustentação P/M/G — todo fim de semana */}
+      {/* Atividades regulares — sempre rolando */}
       <section className="pt-6">
         <div className="px-4 mb-3">
           <h2 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider">
-            Todo fim de semana
+            Sempre rolando
           </h2>
         </div>
         <HomeSustentacao />

@@ -1,12 +1,26 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Users, Camera, MapPin, Info, AlertCircle } from 'lucide-react'
+import {
+  Users, MapPin, Info, AlertCircle,
+  Camera, Brain, Video, Footprints, Sticker, Bookmark, BookOpen,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 import { INTERACAO_SLIDES, KIND_LABELS, type InteracaoSlide } from '@/src/lib/data/interaja'
 
 export function generateStaticParams() {
   return INTERACAO_SLIDES.map((s) => ({ id: s.id }))
+}
+
+const CTA_ICON: Record<InteracaoSlide['kind'], LucideIcon> = {
+  'foto-opp':         Camera,
+  'super-quiz':       Brain,
+  'envio-tela':       Video,
+  'roteiro-guiado':   Footprints,
+  'album-figurinhas': Sticker,
+  'wishlist-endossa': Bookmark,
+  'curiosidade-sp':   BookOpen,
 }
 
 export default async function InteracaoDetail({ params }: { params: Promise<{ id: string }> }) {
@@ -80,7 +94,10 @@ export default async function InteracaoDetail({ params }: { params: Promise<{ id
           className="w-full mt-5 rounded-xl font-bold py-4 text-white press-scale flex items-center justify-center gap-2"
           style={{ backgroundColor: slide.accentColor }}
         >
-          <Camera size={18} />
+          {(() => {
+            const CtaIcon = CTA_ICON[slide.kind]
+            return <CtaIcon size={18} />
+          })()}
           {slide.actionLabel}
         </button>
 
