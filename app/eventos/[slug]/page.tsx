@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, MapPin, Bell, Sparkles } from 'lucide-react'
+import { Calendar, MapPin, Bell } from 'lucide-react'
 import PageHeader from '@/src/components/PageHeader'
 import { GRANDES_EVENTOS, eventoBySlug } from '@/src/lib/data/eventos'
+import HighlightsList from '@/src/features/eventos/HighlightsList'
 
 export function generateStaticParams() {
   return GRANDES_EVENTOS.map((e) => ({ slug: e.slug }))
@@ -67,29 +68,12 @@ export default async function EventoDetail({ params }: { params: Promise<{ slug:
           </Link>
         </div>
 
-        {/* Highlights */}
+        {/* Highlights · cards clicáveis com drawer */}
         <section className="mt-6">
           <h3 className="text-[13px] font-semibold text-tx-secondary uppercase tracking-wider mb-3">
-            O que rola
+            O que rola · toque pra ver mais
           </h3>
-          <div className="bg-white rounded-2xl border border-app-divider overflow-hidden">
-            {evento.highlights.map((h, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-3 p-3 ${
-                  i !== evento.highlights.length - 1 ? 'border-b border-app-divider' : ''
-                }`}
-              >
-                <div
-                  className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: evento.themeColor + '20' }}
-                >
-                  <Sparkles size={14} style={{ color: evento.themeColor }} />
-                </div>
-                <p className="text-[13px] text-tx-primary leading-snug pt-1">{h}</p>
-              </div>
-            ))}
-          </div>
+          <HighlightsList highlights={evento.highlights} accentColor={evento.themeColor} />
         </section>
 
         {/* Palcos */}
