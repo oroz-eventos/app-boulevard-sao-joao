@@ -1,24 +1,70 @@
 'use client'
 import { useState } from 'react'
-import { NOTIFICATION_ITEMS, NOTIFICATION_FILTERS, TONE_COLORS } from '@/src/lib/data/notificacoes'
+import Link from 'next/link'
+import {
+  IconHeart,
+  IconBrain,
+  IconDeviceTv,
+  IconWorld,
+  IconCalendarEvent,
+  IconMusic,
+  IconGift,
+  IconHandStop,
+  IconBuildingMonument,
+  IconShoppingBag,
+  IconPaw,
+  IconInfoCircle,
+  IconMap2,
+  IconPalette,
+} from '@tabler/icons-react'
+import {
+  NOTIFICATION_ITEMS,
+  NOTIFICATION_FILTERS,
+  KIND_TONE,
+  type NotificationKind,
+  type NotificationItem,
+} from '@/src/lib/data/notificacoes'
 import PageHeader from '@/src/components/PageHeader'
+
+const ICON_MAP: Record<NotificationKind, typeof IconHeart> = {
+  'kiss-cam':     IconHeart,
+  'quiz':         IconBrain,
+  'envio-tela':   IconDeviceTv,
+  'janela-mundo': IconWorld,
+  'evento':       IconCalendarEvent,
+  'palco':        IconMusic,
+  'vantagem':     IconGift,
+  'solidario':    IconHandStop,
+  'lugar':        IconBuildingMonument,
+  'feira':        IconShoppingBag,
+  'pet':          IconPaw,
+  'aviso':        IconInfoCircle,
+  'mapa':         IconMap2,
+  'arte-tela':    IconPalette,
+}
 
 export default function NotificacoesPage() {
   const [filter, setFilter] = useState('todas')
 
   const items = filter === 'todas'
     ? NOTIFICATION_ITEMS
-    : NOTIFICATION_ITEMS.filter(n =>
+    : NOTIFICATION_ITEMS.filter((n) =>
         filter === 'novas' ? n.status === 'new' : n.status === 'read'
       )
 
+  const novasCount = NOTIFICATION_ITEMS.filter((n) => n.status === 'new').length
+
   return (
     <div className="animate-fade-in">
-      <PageHeader title="Notificações" showBack />
+      <PageHeader
+        title="Notificações"
+        subtitle={novasCount > 0 ? `${novasCount} novas` : 'Tudo em dia'}
+        showBack
+      />
 
       {/* Filter tabs */}
       <div className="flex gap-0 border-b border-app-divider overflow-x-auto scrollbar-hide px-4">
-        {NOTIFICATION_FILTERS.map(f => (
+        {NOTIFICATION_FILTERS.map((f) => (
           <button
             key={f.id}
             onClick={() => setFilter(f.id)}
@@ -29,37 +75,18 @@ export default function NotificacoesPage() {
             }`}
           >
             {f.label}
+            {f.id === 'novas' && novasCount > 0 && (
+              <span className="ml-1.5 bg-brand text-white text-[10px] font-bold rounded-full px-1.5 py-0.5">
+                {novasCount}
+              </span>
+            )}
           </button>
         ))}
       </div>
 
-      <div className="px-4 pt-4 space-y-3 pb-4">
-        {items.map(notif => (
-          <div
-            key={notif.id}
-            className={`flex gap-3 bg-white rounded-2xl border p-4 press-scale ${
-              notif.status === 'new' ? 'border-brand/20' : 'border-app-divider'
-            }`}
-          >
-            {/* Tone dot */}
-            <div className="shrink-0 pt-0.5">
-              <div
-                className="w-2.5 h-2.5 rounded-full"
-                style={{ backgroundColor: TONE_COLORS[notif.tone] }}
-              />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-2">
-                <h3 className={`text-[14px] font-semibold leading-snug ${
-                  notif.status === 'new' ? 'text-tx-primary' : 'text-tx-secondary'
-                }`}>
-                  {notif.title}
-                </h3>
-                <span className="text-[11px] text-tx-disabled shrink-0">{notif.timeAgo}</span>
-              </div>
-              <p className="text-[12px] text-tx-tertiary mt-1 leading-relaxed">{notif.description}</p>
-            </div>
-          </div>
+      <div className="px-4 pt-4 space-y-2.5 pb-4">
+        {items.map((notif) => (
+          <NotifRow key={notif.id} notif={notif} />
         ))}
         {items.length === 0 && (
           <p className="text-center text-tx-tertiary text-[14px] py-12">
@@ -68,5 +95,68 @@ export default function NotificacoesPage() {
         )}
       </div>
     </div>
+  )
+}
+
+function NotifRow({ notif }: { notif: NotificationItem }) {
+  const Icon = ICON_MAP[notif.kind]
+  const tone = KIND_TONE[notif.kind]
+  const isNew = notif.status === 'new'
+
+  const Inner = (
+    <div
+      className={`flex gap-3 bg-white rounded-2xl border p-3.5 press-scale relative ${
+        isNew ? 'border-brand/20' : 'border-app-divider'
+      }`}
+    >
+      {/* Unread dot */}
+      {isNew && (
+        <span className="absolute top-3 right-3 w-2 h-2 rounded-full bg-brand" />
+      )}
+
+      {/* Contextual icon */}
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+        style={{ backgroundColor: tone.bg }}
+      >
+        <Icon size={20} stroke={1.8} style={{ color: tone.color }} />
+      </div>
+
+      <div className="flex-1 min-w-0 pr-3">
+        <div className="flex items-baseline gap-2">
+          <span
+            className="text-[10px] font-bold uppercase tracking-wide"
+            style={{ color: tone.color }}
+          >
+            {tone.label}
+          </span>
+          <span className="text-[10px] text-tx-disabled">·</span>
+          <span className="text-[10px] text-tx-disabled">{notif.timeAgo}</span>
+        </div>
+        <h3
+          className={`text-[14px] font-semibold leading-snug mt-0.5 ${
+            isNew ? 'text-tx-primary' : 'text-tx-secondary'
+          }`}
+        >
+          {notif.title}
+        </h3>
+        <p className="text-[12px] text-tx-tertiary mt-1 leading-relaxed">
+          {notif.description}
+        </p>
+        {notif.context && (
+          <p className="text-[11px] font-semibold text-tx-secondary mt-1.5">
+            {notif.context}
+          </p>
+        )}
+      </div>
+    </div>
+  )
+
+  return notif.href ? (
+    <Link href={notif.href} className="block">
+      {Inner}
+    </Link>
+  ) : (
+    Inner
   )
 }
